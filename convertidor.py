@@ -1,0 +1,42 @@
+from pdf2docx import parse
+from PIL import Image
+class pdfAWord:
+    pdf = input("Arraste aqui el pdf para convertir: ")
+    if(pdf.endswith(".pdf")):
+        parse(pdf + ".pdf", pdf + ".docx", start=0, end=0)
+    else:
+       print("el archivo ingresado no es pdf") 
+class wordAPdf:
+        
+    word = input("Arraste aqui el word para convertir: ")
+    if(word.endswith(".docx")):
+        parse(word + ".pdf", word + ".docx", start=0, end=0)
+    else:
+        print("el archivo ingresado no es word")
+    
+
+class jpgApng:
+
+    jpg = input("Arraste aqui el jpg para convertir: ")
+    if(jpg.endswith(".jpg")):
+        img_png = Image.open(jpg)
+        ruta = ""
+        for extension in jpg:
+            ruta = ruta + extension
+        ruta = ruta + ".png"
+        img_png.save(ruta)
+    else:
+        print("La imagen ingresada no es JPG")
+
+class pngAjpg:
+    
+    jpg = input("Arraste aqui el jpg para convertir: ")
+    if(jpg.endswith(".png")):
+        img_png = Image.open(jpg)
+        ruta = ""
+        for extension in jpg:
+            ruta = ruta + extension
+        ruta = ruta + ".jpg"
+        img_png.save(ruta)
+    else:
+        print("La imagen ingresada no es PNG")
