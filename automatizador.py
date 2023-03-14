@@ -34,7 +34,7 @@ class Automation:
                 or files.endswith(".rz") or files.endswith(".shn") or files.endswith(".tar") or files.endswith(
             ".xz") \
                 or files.endswith(".jar") or files.endswith(".zoo") or files.endswith(".zpaq"):
-            Compresor.Descomprimir(files)
+            Compresor.DescompresorHestia(files)
     rutadocumentos = ""
     if not os.path.exists("C:/Users/" + os.getlogin() + "/Documentos"):
         rutadocumentos = "/Documents/"

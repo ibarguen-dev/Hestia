@@ -3,14 +3,23 @@ from PIL import Image
 class pdfAWord:
     pdf = input("Arraste aqui el pdf para convertir: ")
     if(pdf.endswith(".pdf")):
-        parse(pdf + ".pdf", pdf + ".docx", start=0, end=0)
+        rutas = pdf.split(".pdf")
+        word =""
+        for ruta in rutas:
+            word = word + ruta
+        word + ".docx"
+        parse(pdf,word, start=0, end=0)
     else:
        print("el archivo ingresado no es pdf") 
 class wordAPdf:
         
     word = input("Arraste aqui el word para convertir: ")
     if(word.endswith(".docx")):
-        parse(word + ".pdf", word + ".docx", start=0, end=0)
+        rutas = word.split(".docx")
+        pdf = ""
+        for ruta in rutas:
+            pdf = pdf + ruta
+        parse(word, pdf, start=0, end=0)
     else:
         print("el archivo ingresado no es word")
     
