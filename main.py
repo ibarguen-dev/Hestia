@@ -1,5 +1,8 @@
 
 from automatizador import Automation
+
+
+
 def menu():
     print('''
 
@@ -27,11 +30,6 @@ def menu():
     print('''
                         ******************************************** MENU DE OPCIONES *************************************
                         *   1. Convertir de pdf a word o de word a pdf                                                    *
-                        *   2. Convertir un archivo de mp4 a mp3                                                          *
-                        *   3. Descargar office y instalar office                                                         *
-                        *   4. Descomprimir archivos                                                                      *
-                        *   5. Hacer copias de seguridad del equipo                                                       *
-                        *   6. Mas informacion de Hestia                                                                  *
                         ***************************************************************************************************   
     ''')
 
@@ -44,21 +42,14 @@ def menu():
 
 
 while True:
-    Automation()
-   # respuesta = int(input("Porfavor ingrese la opcion que quiere que HESTIA ejecute "))
+    Automation.windows()
+    respuesta = int(input("Ingrese una opción del menú: "))
 
-    '''
-    match respuesta :
+    match respuesta:
+
         case 1:
-            convertDocumento()
-        case 2:
+            
+    break
 
-        case 3:
 
-        case 4:
 
-        case 5:
-
-        case 6:
-    '''
-    #verificar = int(input("Si deseas que Hestia Siga ejecutandose ingrese el numero 1. Escriba su respuesta" ))
