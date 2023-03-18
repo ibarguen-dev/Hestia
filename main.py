@@ -1,6 +1,6 @@
 
-from automatizador import Automation
-
+from automatizador import windows
+from convertidor import pdfAWord,wordAPdf
 
 
 def menu():
@@ -30,6 +30,7 @@ def menu():
     print('''
                         ******************************************** MENU DE OPCIONES *************************************
                         *   1. Convertir de pdf a word o de word a pdf                                                    *
+                        *   2. Comprimir y descomprimer rachivos                                                          *
                         ***************************************************************************************************   
     ''')
 
@@ -42,14 +43,33 @@ def menu():
 
 
 while True:
-    Automation.windows()
-    respuesta = int(input("Ingrese una opción del menú: "))
-
-    match respuesta:
-
-        case 1:
+    try:
+        windows()
+        menu()
+        respuesta = input("Ingrese un una opcion del menu: ")
+        match respuesta:
+            case "1":
+                while True:
+                    pdf = input("Ingrese uno  para 1 pdf a word o 2 para word a pdf: ")
+                    match pdf:
+                        case "1":
+                            pdfAWord()
+                            break
+                        case "2":
+                            wordAPdf()
+                            break
+                        case _:
+                            print("La opncion ingresada no existe ")
+            case "2":
+                break
+            case _:
+                print("La opncion ingresada no existe")
             
-    break
+
+    except Exception as e:
+        print(e)
+
+
 
 
 

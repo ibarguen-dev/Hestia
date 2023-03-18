@@ -10,20 +10,52 @@ def pdfAWord():
         word =""
         for ruta in rutas:
             word = word + ruta
-        word + ".docx"
+        word = word + ".docx"
         parse(pdf,word, start=0, end=0)
-        print("el aechivo ya se a convertido")
+        print("el archivo ya se a convertido")
     else:
        print("el archivo ingresado no es pdf") 
        
 def wordAPdf():
     word = input("Arraste aqui el word para convertir: ")
-    if(word.endswith(".docx")):
-        rutas = word.split(".docx")
+    if word.endswith(".docx") or word.endswith(".doc") or word.endswith(".docm") or word.endswith(".dot") or word.endswith(".dotx") or word.endswith(".dotm"):
+
+        rutas = ""
+
+        if word.endswith(".doc"):
+
+            rutas = word.split(".doc")
+
+        elif word.endswith(".doc"):
+
+            rutas = word.split(".doc")
+        
+        elif word.endswith(".docm"):
+
+            rutas = word.split(".docm")
+        
+        elif word.endswith(".dot"):
+
+            rutas = word.split(".dot")
+        
+        elif word.endswith(".dotx"):
+
+            rutas = word.split(".dotx")
+        
+        elif word.endswith(".dotm"):
+
+            rutas = word.split(".dotm")
+
         pdf = ""
+
         for ruta in rutas:
+
             pdf = pdf + ruta
+
+        pdf = pdf + "pdf"
+
         parse(word, pdf, start=0, end=0)
+
     else:
         print("el archivo ingresado no es word")
 
