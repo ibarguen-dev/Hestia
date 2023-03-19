@@ -1,9 +1,9 @@
 from pdf2docx import parse
 from PIL import Image
+from os import system
 
 
-
-def pdfAWord():
+def Pdf():
     pdf = input("Arraste aqui el pdf para convertir: ")
     if(pdf.endswith(".pdf")):
         rutas = pdf.split(".pdf")
@@ -16,7 +16,7 @@ def pdfAWord():
     else:
        print("el archivo ingresado no es pdf") 
        
-def wordAPdf():
+def Word():
     word = input("Arraste aqui el word para convertir: ")
     if word.endswith(".docx") or word.endswith(".doc") or word.endswith(".docm") or word.endswith(".dot") or word.endswith(".dotx") or word.endswith(".dotm"):
 
@@ -58,27 +58,72 @@ def wordAPdf():
 
     else:
         print("el archivo ingresado no es word")
+#
+def Png():
+    imagen = input("Arraste aqui la imagen para convertir: ")
+    if(imagen.endswith(".jpg") or  imagen.endswith(".webp")):
+        
+        extension = ""
 
-def jpgApng():
-    jpg = input("Arraste aqui el jpg para convertir: ")
-    if(jpg.endswith(".jpg")):
-        img_png = Image.open(jpg)
-        ruta = ""
-        for extension in jpg:
-            ruta = ruta + extension
-        ruta = ruta + ".png"
-        img_png.save(ruta)
-    else:
-        print("La imagen ingresada no es JPG")
+        if imagen.endswith(".jpg"):
 
-def pngAjpg():
-    jpg = input("Arraste aqui el jpg para convertir: ")
-    if(jpg.endswith(".png")):
-        img_png = Image.open(jpg)
-        ruta = ""
-        for extension in jpg:
-            ruta = ruta + extension
-        ruta = ruta + ".jpg"
-        img_png.save(ruta)
+            extension = imagen.split(".jpg")
+
+        elif imagen.endswith(".webp"):
+
+            extension = imagen.split(".webp")
+        
+        png = ""
+
+        for ruta in extension:
+
+            png = png + ruta 
+        
+        png = png + ".png"
+        print(png)
+        im = Image.open(imagen)
+
+        im.save(png)
+
+        im.close()
     else:
-        print("La imagen ingresada no es PNG")
+        print("El archivo ingresado no es una imagen...")
+#
+
+def Jpg():
+
+    imagen = input("Arraste aqui la imagen para convertir: ")
+
+    while True:
+        try:
+            if(imagen.endswith(".png") or imagen.endswith(".webp")):
+
+                rutas = ""
+
+                if imagen.endswith(".png"):
+
+                    ruta = imagen.split(".png")
+
+                elif imagen.endswith(".webp"):
+
+                    ruta = imagen.split(".webp")
+
+                jpg = ""
+
+                for ruta in rutas:
+
+                    jpg = jpg + ruta 
+
+                jpg = jpg + ".jpg"
+
+                im = Image.open(imagen)
+
+                im.save(jpg)
+
+                im.close()
+                break
+            else:
+                print("El archivo ingresado no es una imagen...")
+                system("cls")
+        except Exception as error:
+            print(f"Error al convertir la imagen: %s" % error)
