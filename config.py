@@ -1,7 +1,9 @@
 #Biblioteca de convertidores
 from convertidor import Pdf, Word, Png, Jpg
-
-
+#
+from compresor import Descompresor,Compresor
+#
+from libyoutebe import videoAltaResolucion, videoBajaResolucion
 def menu():
     print('''
 
@@ -31,6 +33,7 @@ def menu():
                         *   1. Convertidores                                                                              *
                         *   2. Comprimir y descomprimer archivos                                                          *
                         *   3. Descargar videos de youtube                                                                *
+                        *   4. Cerrar la aplicación                                                                       *
                         ***************************************************************************************************   
     ''')
 
@@ -47,10 +50,10 @@ def convertidores():
                         ****************************************************************************************************
     ''')
 
-    opcion = input("Ingrese una opcion del menu : ")
+    respuesta = input("Ingrese una opcion del menu : ")
 
     while True:
-        match opcion:
+        match respuesta:
 
             case "1":
 
@@ -77,12 +80,70 @@ def convertidores():
                 break
 
             case _:
-                print ("La opcion ingresada no existe")
+                print (f"La opcion ingresada no existe {respuesta}")
 
 def compresore ():
 
 
 
+
+    while True:
+
+        print('''
+            ********************************************** MENU DE OPCIONES ************************************
+            * 1. Comprimir                                                                                     *
+            * 2. Extraer                                                                                       *
+            * 3. Salir                                                                                         *                                          
+            ****************************************************************************************************
+        ''')
+
+        respuestas = input('Ingrese una opcion del menu: ')
+        
+        match respuestas:
+
+            case "1":
+
+                Compresor()
+                break
+
+            case "2":
+
+                Descompresor()
+                break
+
+            case "3":
+
+                break
+
+            case _:
+                print(f"Esta opcion del menu no existe: {respuestas}")
+
 def youtube ():
 
-    
+    while True:
+        print('''
+            ********************************************** MENU DE OPCIONES ************************************
+            * 1. Video de alta resolucion                                                                      *
+            * 2. Video de baja resolucion                                                                      *  
+            * 3. Salir                                                                                         *                                                         *                                                 
+            ****************************************************************************************************
+        ''')
+
+        respuesta = input("Ingrese una opcion del menu: ")
+
+        match  respuesta:
+        
+            case "1":
+                videoAltaResolucion()
+                break
+            
+            case "2":
+                
+                videoBajaResolucion()
+                break
+
+            case "3":
+                break
+
+            case _:
+                break

@@ -1,7 +1,6 @@
 from automatizador import windows
-from config import menu
-from config import convertidores
-
+from config import menu, convertidores, compresore,youtube
+from os import system
 
 
 
@@ -19,19 +18,15 @@ while True:
             case "1":
                 convertidores()
             case "2":
-                
+                compresore()
             case "3":
-            
-            case "5":
+                youtube()
+            case "4":
                 break
             case _:
-                print("La opncion ingresada no existe")
+                print("La opcion ingresada no existe")
             
+        system("cls")
 
     except Exception as e:
         print(e)
-
-
-
-
-
