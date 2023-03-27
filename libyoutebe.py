@@ -3,7 +3,7 @@ import os
 
 def videoAltaResolucion():
 
-    url = input("Ingrese la el link o la direccion url: ")
+    url = input("Ingrese la el link o la dirección url: ")
 
     while True:
 
@@ -24,7 +24,8 @@ def videoAltaResolucion():
                 
             else:
 
-                print("La direccion ingresada no es correcta")
+                print("La dirección ingresada no es correcta")
+                
 
 
         except Exception as error:
@@ -33,7 +34,7 @@ def videoAltaResolucion():
 
 def videoBajaResolucion():
 
-    url = input("Ingrese la el link o la direccion url: ")
+    url = input("Ingrese la el link o la dirección url: ")
 
     while True:
 
@@ -54,7 +55,7 @@ def videoBajaResolucion():
                 
             else:
 
-                print("La direccion ingresada no es correcta")
+                print("La dirección  ingresada no es correcta")
 
 
         except Exception as error:

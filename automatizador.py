@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from shutil import move
-
+from compresor import Descompresor
 
 
 
@@ -50,12 +50,13 @@ def windows():
     os.chdir("C:/Users/" + os.getlogin() + "/Downloads/")
     #
 
-    '''for files in os.listdir():
+    for files in os.listdir():
         #
         if files.endswith(".rar") or files.endswith(".zip") or files.endswith(".7z"):
+            
             #
-            Compresor.DescompresorHestia(files)
-    '''#        
+            Descompresor(files)
+    #        
     rutadocumentos = ""
     #
     if not os.path.exists("C:/Users/" + os.getlogin() + "/Documentos"):

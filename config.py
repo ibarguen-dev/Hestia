@@ -4,6 +4,8 @@ from convertidor import Pdf, Word, Png, Jpg
 from compresor import Descompresor
 #
 from libyoutebe import videoAltaResolucion, videoBajaResolucion
+#
+from time import sleep
 def menu():
     print('''
 
@@ -31,7 +33,7 @@ def menu():
     print('''
             ******************************************** MENU DE OPCIONES *************************************
             *   1. Convertidores                                                                              *
-            *   2. Comprimir y descomprimer archivos                                                          *
+            *   2. Descomprimer archivos                                                          *
             *   3. Descargar videos de youtube                                                                *
             *   4. Cerrar la aplicación                                                                       *
             ***************************************************************************************************   
@@ -42,15 +44,15 @@ def convertidores():
 
     print('''
             ********************************************** MENU DE OPCIONES ************************************
-            * 1. Convertir un pdf a un word                                                                    *
-            * 2. Convertir de word a pdf                                                                       *
-            * 3. Convertir imagen a png                                                                        *
-            * 4. Convertir imagen a jpg                                                                        *
+            * 1. Convertir un PDF a un WORD                                                                    *
+            * 2. Convertir de WORD a PDF                                                                       *
+            * 3. Convertir imagen a PNG                                                                        *
+            * 4. Convertir imagen a JPG                                                                        *
             * 5. Salir                                                                                         *                                                 
             ****************************************************************************************************
     ''')
 
-    respuesta = input("Ingrese una opcion del menu : ")
+    respuesta = input("Ingrese una opción del menú: ")
 
     while True:
         match respuesta:
@@ -80,7 +82,7 @@ def convertidores():
                 break
 
             case _:
-                print (f"La opcion ingresada no existe {respuesta}")
+                print (f"La opción ingresa no existe, elija una de las opciones del menú")
 
 def compresore ():
 
@@ -96,7 +98,7 @@ def compresore ():
             ****************************************************************************************************
         ''')
 
-        respuestas = input('Ingrese una opcion del menu: ')
+        respuestas = input('Ingrese una opción del menú: ')
         
         match respuestas:
 
@@ -110,20 +112,20 @@ def compresore ():
                 break
 
             case _:
-                print(f"Esta opcion del menu no existe: {respuestas}")
+                print(f"La opción ingresa no existe, elija una de las opciones del menú")
 
 def youtube ():
 
     while True:
         print('''
-            ********************************************** MENU DE OPCIONES ************************************
-            * 1. Video de alta resolucion                                                                      *
-            * 2. Video de baja resolucion                                                                      *  
+            ********************************************** MENÚ DE OPCIONES ************************************
+            * 1. Video de alta resolución                                                                      *
+            * 2. Video de baja resolución                                                                      *  
             * 3. Salir                                                                                         *                                                                                                         
             ****************************************************************************************************
         ''')
 
-        respuesta = input("Ingrese una opcion del menu: ")
+        respuesta = input("Ingrese una opción del menú: ")
 
         match  respuesta:
         
@@ -140,4 +142,6 @@ def youtube ():
                 break
 
             case _:
+                print("La opción ingresa no existe, elija una de las opciones del menú")
+                sleep(5)
                 break

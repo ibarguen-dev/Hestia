@@ -1,100 +1,126 @@
 from pdf2docx import parse
 from PIL import Image
 from os import system
-
+from time import sleep
 
 def Pdf():
-    pdf = input("Arraste aqui el pdf para convertir: ")
-    if(pdf.endswith(".pdf")):
-        rutas = pdf.split(".pdf")
-        word =""
-        for ruta in rutas:
-            word = word + ruta
-        word = word + ".docx"
-        parse(pdf,word, start=0, end=0)
-        print("el archivo ya se a convertido")
-    else:
-       print("el archivo ingresado no es pdf") 
-       
+    while True:
+        try:
+            pdf = input("Arrastre aquí el PDF para convertir: ")
+            if(pdf.endswith(".pdf")):
+                rutas = pdf.split(".pdf")
+                word =""
+                for ruta in rutas:
+                    word = word + ruta
+                word = word + ".docx"
+                parse(pdf,word, start=0, end=0)
+                print("El archivo ya se ha convertido")
+                break
+            else:
+               print("El archivo ingresado no es PDF")
+               sleep(7)
+               system("cls")
+        except Exception as e:
+            print(e)
+            sleep(7)
+            system("cls")
 def Word():
-    word = input("Arraste aqui el word para convertir: ")
-    if word.endswith(".docx") or word.endswith(".doc") or word.endswith(".docm") or word.endswith(".dot") or word.endswith(".dotx") or word.endswith(".dotm"):
-
-        rutas = ""
-
-        if word.endswith(".doc"):
-
-            rutas = word.split(".doc")
-
-        elif word.endswith(".doc"):
-
-            rutas = word.split(".doc")
+    
+    
+    while True:
+        word = input("Arrastre aquí el WORD para convertir: ")
         
-        elif word.endswith(".docm"):
+        try:
+            if word.endswith(".docx") or word.endswith(".doc") or word.endswith(".docm") or word.endswith(".dot") or word.endswith(".dotx") or word.endswith(".dotm"):
 
-            rutas = word.split(".docm")
-        
-        elif word.endswith(".dot"):
+                rutas = ""
 
-            rutas = word.split(".dot")
-        
-        elif word.endswith(".dotx"):
+                if word.endswith(".doc"):
 
-            rutas = word.split(".dotx")
-        
-        elif word.endswith(".dotm"):
+                    rutas = word.split(".doc")
 
-            rutas = word.split(".dotm")
+                elif word.endswith(".doc"):
 
-        pdf = ""
+                    rutas = word.split(".doc")
 
-        for ruta in rutas:
+                elif word.endswith(".docm"):
 
-            pdf = pdf + ruta
+                    rutas = word.split(".docm")
 
-        pdf = pdf + "pdf"
+                elif word.endswith(".dot"):
 
-        parse(word, pdf, start=0, end=0)
+                    rutas = word.split(".dot")
 
-    else:
-        print("el archivo ingresado no es word")
-#
+                elif word.endswith(".dotx"):
+
+                    rutas = word.split(".dotx")
+
+                elif word.endswith(".dotm"):
+
+                    rutas = word.split(".dotm")
+
+                pdf = ""
+
+                for ruta in rutas:
+
+                    pdf = pdf + ruta
+
+                pdf = pdf + "pdf"
+
+                parse(word, pdf, start=0, end=0)
+                break
+            else:
+                print("El archivo ingresado no es WORD")
+                sleep(7)
+        except Exception as e:
+            print(e)
+            sleep(7)
+            system("cls")
 def Png():
-    imagen = input("Arraste aqui la imagen para convertir: ")
-    if(imagen.endswith(".jpg") or  imagen.endswith(".webp")):
-        
-        extension = ""
+    
+    while True:
+        try:
+            imagen = input("Arrastre aquí la imagen para convertir: ")
+            if(imagen.endswith(".jpg") or  imagen.endswith(".webp")):
 
-        if imagen.endswith(".jpg"):
+                extension = ""
 
-            extension = imagen.split(".jpg")
+                if imagen.endswith(".jpg"):
 
-        elif imagen.endswith(".webp"):
+                    extension = imagen.split(".jpg")
 
-            extension = imagen.split(".webp")
-        
-        png = ""
+                elif imagen.endswith(".webp"):
 
-        for ruta in extension:
+                    extension = imagen.split(".webp")
 
-            png = png + ruta 
-        
-        png = png + ".png"
-        print(png)
-        im = Image.open(imagen)
+                png = ""
 
-        im.save(png)
+                for ruta in extension:
 
-        im.close()
-    else:
-        print("El archivo ingresado no es una imagen...")
-#
+                    png = png + ruta 
 
+                png = png + ".png"
+                print(png)
+                im = Image.open(imagen)
+
+                im.save(png)
+
+                im.close()
+                break
+            else:
+                print("El archivo ingresado no es una imagen...")
+                sleep(7)
+                system("cls")
+        except Exception as e:
+            print(e)
+            sleep(7)
+            system("cls")
 def Jpg():
 
-    imagen = input("Arraste aqui la imagen para convertir: ")
+    
 
     while True:
+        imagen = input("Arrastre aquí la imagen para convertir: ")
         try:
             if(imagen.endswith(".png") or imagen.endswith(".webp")):
 
@@ -124,6 +150,9 @@ def Jpg():
                 break
             else:
                 print("El archivo ingresado no es una imagen...")
+                sleep(7)
                 system("cls")
         except Exception as error:
             print(f"Error al convertir la imagen: %s" % error)
+            sleep(7)
+            system("cls")

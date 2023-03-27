@@ -4,7 +4,7 @@ from  shutil import make_archive
 
 
 def Descompresor():
-    file = input("Arraste aqui el archivo a descomprimir: ")
+    file = input("Arrastre aquí el archivo a descomprimir: ")
     extract_archive(file)
 
 
