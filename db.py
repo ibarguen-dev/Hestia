@@ -5,12 +5,17 @@ class Database():
     conn = sqlite3.connect("database.db")
 
     def __init__ (self):
+        
         self.conn
+
         self.Create()
 
     def Create (self):
+
         self.conn.execute("CREATE TABLE IF NOT EXISTS settings (python integer, data integer)")
+
         self.conn.execute("CREATE TABLE IF NOT EXISTS address (addres text)")
+
         self.conn.execute("CREATE TABLE IF NOT EXISTS user (username text)")
 
     def InsertSettings (self,python,data):
@@ -101,6 +106,3 @@ class Database():
 
             return "Error: "+ e
 
-hola = Database()
-
-print(hola.ReadUser())

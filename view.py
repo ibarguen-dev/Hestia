@@ -1,3 +1,7 @@
+from setting import settings
+
+setting = settings()
+
 class menu():
 
     def __init__(self):
