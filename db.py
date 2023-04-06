@@ -45,6 +45,16 @@ class Database():
         except Exception as e:
 
             return "Error: "+ e
+        
+    def DelateSettings(self):
+
+        try:
+            self.conn.execute("DELETE FROM settings")
+            self.conn.commit()
+            return True
+        except Exception as e:
+            return "Error: " + e
+
     
     def InsertAddres (self,adrees):
 
@@ -106,3 +116,11 @@ class Database():
 
             return "Error: "+ e
 
+    def UpedateUser(self, user):
+
+        try:
+             self.conn.execute("UPDATE user SET username = '"+user+"'")
+             self.conn.commit()
+             return True
+        except Exception as e:
+            return "Error: "+ e

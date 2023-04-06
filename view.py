@@ -1,11 +1,15 @@
-from setting import settings
+from settings import setting, convert, compressor, youlib
 
-setting = settings()
+
 
 class menu():
-
+    config = setting()
+    converts = convert()
+    compresors = compressor()
+    youtubes = youlib()
     def __init__(self):
         self.menu()
+        self.setting
 
     def menu(self):
 
@@ -53,27 +57,33 @@ class menu():
 
             match respuesta:
                 case "1":
-                    
+
+                    self.converts.Pdf()
 
                     break
 
                 case "2":
 
+                    self.converts.Word()
 
                     break
 
                 case "3":
 
+                    self.converts.Png()
 
                     break
 
                 case "4":
 
+                    self.converts.Jpg()
 
                     break
 
                 case "5":
+
                     break
+
                 case _:
 
                     print (f"La opcion ingresada no existe {respuesta}")
@@ -96,11 +106,13 @@ class menu():
             match respuestas:
                 case "1":
 
+                    self.compresors.Compresor()
 
                     break
 
                 case "2":
 
+                    self.compresors.Descompresor()
 
                     break
 
@@ -128,11 +140,13 @@ class menu():
             
                 case "1":
 
+                    self.youtubes.videoHighResolution()
 
                     break
                 
                 case "2":
 
+                    self.youtubes.videoLowestResolution()
 
                     break
 
@@ -141,38 +155,6 @@ class menu():
                     break
 
                 case _:
+
                     print(f"Esta opcion no existe{respuesta}")
                     
-    def office(self):
-
-        while True:
-
-            print('''
-                ********************************************** MENU DE OPCIONES ************************************
-                * 1. Instalar office  y activarlo                                                                  *
-                * 2. Activar office                                                                                *  
-                * 3. Activar windows                                                                               *   
-                *    4Salir                                                                                        *                                                                                                      
-                ****************************************************************************************************
-            ''')
-
-            respuesta = input("Ingrese una opcion del menu: ")
-
-            match respuesta:
-                case "1":
-
-
-                    break
-
-                case "2":
-
-
-                    break
-
-                case "2":
-
-
-                    break
-
-                case "3":
-                    break

@@ -75,7 +75,7 @@ class Download():
                             f.write(response.content)
                         
                         system("C:/Users/"+ getlogin()+ "/Downloads/winrar-x64-621es.exe")
-
+                        system("pip install patool")
                         remove("C:/Users/"+ getlogin()+ "/Downloads/winrar-x64-621es.exe")
 
                         break
