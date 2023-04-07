@@ -3,13 +3,21 @@ from settings import setting, convert, compressor, youlib
 
 
 class menu():
+
     config = setting()
+
     converts = convert()
+
     compresors = compressor()
+
     youtubes = youlib()
+
+
     def __init__(self):
+
         self.menu()
-        self.setting
+
+        self.config
 
     def menu(self):
 

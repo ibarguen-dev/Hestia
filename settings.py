@@ -16,7 +16,7 @@ from patoolib import extract_archive, create_archive
 
 from pytube import YouTube
 
-class settings():
+class setting():
 
     descargas = Download()
 
@@ -44,7 +44,7 @@ class settings():
 
                     break 
 
-        elif(response != getlogin()):
+        elif(response[0] != getlogin()):
 
             print("Se a detectado que HESTIA se abrió en otro computador ")
 
@@ -136,7 +136,7 @@ class convert():
     def __init__(self):
         pass
     
-    def Pdf():
+    def Pdf(self):
 
         pdf = input("Arraste aqui el pdf para convertir: ")
 
@@ -160,7 +160,7 @@ class convert():
        
             print("el archivo ingresado no es pdf") 
     
-    def Word():
+    def Word(self):
 
         word = input("Arraste aqui el word para convertir: ")
 
@@ -206,7 +206,7 @@ class convert():
 
             print("el archivo ingresado no es word")
 
-    def Png():
+    def Png(self):
 
         imagen = input("Arraste aqui la imagen para convertir: ")
 
@@ -242,7 +242,7 @@ class convert():
 
             print("El archivo ingresado no es una imagen...")
 
-    def Jpg():
+    def Jpg(self):
 
         imagen = input("Arraste aqui la imagen para convertir: ")
 
@@ -286,7 +286,10 @@ class convert():
 
 class compressor():
 
-    def Descompresor():
+    def __init__(self):
+        pass
+
+    def Descompresor(self):
 
         while True:
 
@@ -321,7 +324,7 @@ class compressor():
 
                 sleep(30)
 
-    def Compresor():
+    def Compresor(self):
     
         try:
 
@@ -367,16 +370,28 @@ class youlib():
 
     
     def videoLowestResolution():
+
         url = input("Ingrese la el link o la direccion url: ")
+
         while True:
+
             try:
+
                 if(url.startswith("https://www.youtube.com/watch?v=")):
+
                     yt = YouTube(url)
+
                     videos = yt.streams.get_lowest_resolution()
+
                     videos.download("C:/Users/" + getlogin() + "/Downloads/")
+
                     break
+
                 else:
+
                     print("La direccion ingresada no es correcta")
+
             except Exception as error:
+                
                 print(f"Error al descargar un video {error}")
     

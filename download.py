@@ -16,7 +16,7 @@ class Download():
 
                 chdir ('C:/Users/'+getlogin()+'/Downloads/')
 
-                url = "https://www.python.org/ftp/python/3.11.2/python-3.11.2-amd64.exe"
+                url = "https://www.python.org/ftp/python/3.11.3/python-3.11.3.exe"
 
                 response = get(url)
                 
@@ -24,7 +24,7 @@ class Download():
                 
                     try:
 
-                        with open("python-3.11.2-amd64.exe", "wb") as f:
+                        with open("python-3.11.3.exe", "wb") as f:
                         
                             f.write(response.content)
 
@@ -32,14 +32,24 @@ class Download():
 
                         system('"C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe" github.com')
 
-                        system("C:/Users/"+ getlogin()+ "/Downloads/python-3.11.2-amd64.exe")
+                        system("C:/Users/"+ getlogin()+ "/Downloads/python-3.11.3.exe")
 
-                        remove("C:/Users/"+ getlogin()+ "/Downloads/python-3.11.2-amd64.exe")
+                        remove("C:/Users/"+ getlogin()+ "/Downloads/python-3.11.3.exe")
+
+                        system("python.exe -m pip install --upgrade pip")
+
+                        system("pip install patool")
+
+                        system("pip install pdf2docx")
+
+                        system("pip install Pillow")
+
+                        system("pip install  pytube")
 
                         break
                     except Exception as e:
 
-                        print("Error :"+e)
+                        print("Error")
 
                         sleep(10)
                 else:
@@ -62,7 +72,7 @@ class Download():
 
                 chdir('C:/Users/'+getlogin()+'/Downloads/')
 
-                url = "https://download1496.mediafire.com/sk1en9twswmgd5k1GwShdW-6YrM5PTZMosqfX93mq1FwZ-GRdDh-8IaLmN29XUamhN31rC1_be8K1rGDI938WHSH_A4g7lo/hp5etmv70x4echi/winrar-x64-621es.exe"
+                url = "https://d.winrar.es/d/52z1680789825/C2bBY2XX4KRNNBxOCukymw/winrar-x32-621es.exe"
 
                 response = get(url)
 
@@ -70,13 +80,13 @@ class Download():
 
                     try:
 
-                        with open("winrar-x64-621es.exe","wb") as f:
+                        with open("winrar-x32-621es.exe","wb") as f:
 
                             f.write(response.content)
                         
-                        system("C:/Users/"+ getlogin()+ "/Downloads/winrar-x64-621es.exe")
-                        system("pip install patool")
-                        remove("C:/Users/"+ getlogin()+ "/Downloads/winrar-x64-621es.exe")
+                        system("C:/Users/"+ getlogin()+ "/Downloads/winrar-x32-621es.exe")
+
+                        remove("C:/Users/"+ getlogin()+ "/Downloads/winrar-x32-621es.exe")
 
                         break
 
@@ -85,4 +95,5 @@ class Download():
                         print("Error :" + e)
             
             except Exception as e:
+
                 print("Error :" + e)
