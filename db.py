@@ -18,6 +18,8 @@ class Database():
 
         self.conn.execute("CREATE TABLE IF NOT EXISTS user (username text)")
 
+        self.conn.execute("CREATE TABLE IF NOT EXISTS cloudO (oficcelioud text)")
+
     def InsertSettings (self,python,data):
 
         try: 
@@ -51,6 +53,7 @@ class Database():
         try:
             self.conn.execute("DELETE FROM settings")
             self.conn.commit()
+            self.Create()
             return True
         except Exception as e:
             return "Error: " + e
@@ -116,11 +119,27 @@ class Database():
 
             return "Error: "+ e
 
-    def UpedateUser(self, user):
+
+
+    def InsertCloud(self, cloud):
 
         try:
-             self.conn.execute("UPDATE user SET username = '"+user+"'")
-             self.conn.commit()
-             return True
+            self.conn.execute("INSERT INTO cloud VALUES('"+cloud+"')")
+
+            self.conn.commit()
+
+            return True
+        
         except Exception as e:
-            return "Error: "+ e
+
+            return Exception
+    
+    def DeleteCloud(self, cloud):
+
+        try:
+            self.conn.execute("DELETE FROM cloudO")
+            self.conn.commit()
+            self.Create()
+            return True
+        except Exception as e:
+            return "Error: " + e

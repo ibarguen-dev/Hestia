@@ -1,7 +1,5 @@
 from settings import setting, convert, compressor, youlib
 
-
-
 class menu():
 
     config = setting()

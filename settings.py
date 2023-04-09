@@ -2,7 +2,7 @@ from db import Database
 
 from download import Download
 
-from os import getlogin
+from os import getlogin, system
 
 from time import sleep
 
@@ -58,7 +58,7 @@ class setting():
 
             if response == True:
 
-                response  = self.database.UpedateUser()
+                response =  self.database.InsertUser(getlogin())
 
                 if(response == True):
 
@@ -128,7 +128,9 @@ class setting():
                     print(response)
 
             else: print("Response")           
-            
+        else:
+
+            response = self.disks.disk("C")
         
 
 class convert():
@@ -279,7 +281,8 @@ class convert():
                     break
                 else:
                     print("El archivo ingresado no es una imagen...")
-
+                    sleep(15)
+                    system("cls")
             except Exception as error:
 
                 print(f"Error al convertir la imagen: %s" % error)
@@ -315,7 +318,9 @@ class compressor():
 
 
                 extract_archive(file)
-
+                print("La extrasion a finalizado correctamente")
+                sleep(15)
+                system("cls")
                 break
 
             except Exception as e:
@@ -331,16 +336,21 @@ class compressor():
             file = input("Arraste aqui el archivo a comprimir: ")
                 
             create_archive(file)
-            
+
+            print("La compresion a finalizado correctamente")
+
+            sleep(15)
+
+            system("cls")
+
         except Exception as e:
                 
-            input(e)
-                
-            sleep(30)
+            print(e)
+
 
 class youlib():
 
-    def videoHighResolution():
+    def videoHighResolution(self):
 
         url = input("Ingrese la el link o la direccion url: ")
 
@@ -357,6 +367,12 @@ class youlib():
 
                     videos.download("C:/Users/" + getlogin() + "/Downloads/")
 
+                    print("La descarga del video es correcta..")
+
+                    sleep(15)
+
+                    system("cls")
+
                     break
 
                     
@@ -369,7 +385,7 @@ class youlib():
                 print(f"Error al descargar un video {error}")
 
     
-    def videoLowestResolution():
+    def videoLowestResolution(self):
 
         url = input("Ingrese la el link o la direccion url: ")
 
@@ -384,6 +400,12 @@ class youlib():
                     videos = yt.streams.get_lowest_resolution()
 
                     videos.download("C:/Users/" + getlogin() + "/Downloads/")
+
+                    print("La descarga del video es correcta..")
+
+                    sleep(15)
+
+                    system("cls")
 
                     break
 
