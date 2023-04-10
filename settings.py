@@ -16,17 +16,20 @@ from patoolib import extract_archive, create_archive
 
 from pytube import YouTube
 
+from autolib import automa
+
 class setting():
 
     descargas = Download()
 
     database = Database()
 
-    disks = validation()
+    validations = validation()
 
     def __init__(self):
         self.database
         self.user()
+
     def user(self):
         
         print("Cargando...")
@@ -68,11 +71,13 @@ class setting():
 
                     print(response)
 
-                    input()
+                    sleep(10) 
             else:
                 print(response)
 
-                input()            
+                sleep(10) 
+                
+        system("cls")          
 
             
 
@@ -111,13 +116,13 @@ class setting():
 
             ruta = input("Ingrese la letra del disco a utilizar: ").upper()
 
-            response = self.disks.disk(ruta)
+            response = self.validations.disk(ruta)
 
             if response.endswith(":/"):
 
                 response = self.database.InsertAddres(response)
 
-                if(response == "True"):
+                if(response == True):
 
                     print("Ruta guardad...")
                     
@@ -130,8 +135,28 @@ class setting():
             else: print("Response")           
         else:
 
-            response = self.disks.disk("C")
-        
+            response = self.database.InsertAddres("C:/")
+
+            if response == True:
+
+                print("La ruta guardada por defecto...")
+
+                sleep(10)
+
+                onedriver = self.validations.oneDrive()
+
+                if onedriver:
+    
+                    data = self.database.InsertCloud("1")
+                
+                else:
+
+                    data = self.database.InsertCloud("0")
+
+                if data == Exception :
+
+                    input(data)
+                system("cls")
 
 class convert():
 
@@ -161,6 +186,8 @@ class convert():
         else:
        
             print("el archivo ingresado no es pdf") 
+        
+        system("cls")
     
     def Word(self):
 
@@ -207,6 +234,8 @@ class convert():
         else:
 
             print("el archivo ingresado no es word")
+        
+        system("cls")
 
     def Png(self):
 
@@ -243,6 +272,8 @@ class convert():
         else:
 
             print("El archivo ingresado no es una imagen...")
+        
+        system("cls")
 
     def Jpg(self):
 
@@ -286,6 +317,8 @@ class convert():
             except Exception as error:
 
                 print(f"Error al convertir la imagen: %s" % error)
+            
+            system("cls")
 
 class compressor():
 
@@ -329,23 +362,30 @@ class compressor():
 
                 sleep(30)
 
+
+
     def Compresor(self):
-    
-        try:
+        
+        while True:
 
-            file = input("Arraste aqui el archivo a comprimir: ")
-                
-            create_archive(file)
+            try:
 
-            print("La compresion a finalizado correctamente")
+                file = input("Arraste aqui el archivo a comprimir: ")
 
-            sleep(15)
+                create_archive(file)
 
-            system("cls")
+                print("La compresion a finalizado correctamente")
 
-        except Exception as e:
-                
-            print(e)
+                sleep(15)
+
+                system("cls")
+
+                break
+
+            except Exception as e:
+
+                print(e)
+
 
 
 class youlib():
@@ -417,3 +457,63 @@ class youlib():
                 
                 print(f"Error al descargar un video {error}")
     
+class automatization():
+
+    data = Database()
+    autolib = automa()
+    validations = validation()
+    def __init__(self):
+        self.data
+        self.auto()
+        self.autolib
+
+    
+    def auto(self):
+
+        router = ""
+
+        disk = self.data.ReadAdress()[0]
+
+        documents = ""
+
+        onedrive = ""
+        
+        if(disk.endswith("C:/")):
+
+            onedrive = self.data.ReadCloud()
+
+            if onedrive[0] == "1":
+
+                documents = self.validations.documentsOneDriver()
+
+                router = disk + "Users/"+getlogin()+"/OneDriver/"+documents+"/"
+
+            else: 
+
+                documents = self.validations.documentsNormal()
+
+                router = disk + "Users/"+getlogin()+"/"+documents+"/"
+            
+        else:
+
+            router = disk
+        
+
+        self.autolib.documnts(router)
+
+
+
+        
+
+
+        
+
+
+
+
+
+
+
+
+            
+        

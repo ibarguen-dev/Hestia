@@ -72,7 +72,7 @@ class Download():
 
                 chdir('C:/Users/'+getlogin()+'/Downloads/')
 
-                url = "https://d.winrar.es/d/52z1680789825/C2bBY2XX4KRNNBxOCukymw/winrar-x32-621es.exe"
+                url = "https://download1654.mediafire.com/o6it8x89btdg4nAcfxwqgZFJUPuf13-1ngI-08U-i5oJfsWYtmQOVG2b6bRSIKNw6SwwWSNKIDG8asTeysOk9jlNr4RNV_o/mysis9fqbsnsf2y/winrar32.exe"
 
                 response = get(url)
 
@@ -80,13 +80,13 @@ class Download():
 
                     try:
 
-                        with open("winrar-x32-621es.exe","wb") as f:
+                        with open("winrar32.exe","wb") as f:
 
                             f.write(response.content)
                         
-                        system("C:/Users/"+ getlogin()+ "/Downloads/winrar-x32-621es.exe")
+                        system("C:/Users/"+ getlogin()+ "/Downloads/winrar32.exe")
 
-                        remove("C:/Users/"+ getlogin()+ "/Downloads/winrar-x32-621es.exe")
+                        remove("C:/Users/"+ getlogin()+ "/Downloads/winrar32.exe")
 
                         break
 

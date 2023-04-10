@@ -1,4 +1,4 @@
-from settings import setting, convert, compressor, youlib
+from settings import setting, convert, compressor, youlib, automatization
 
 class menu():
 
@@ -9,6 +9,8 @@ class menu():
     compresors = compressor()
 
     youtubes = youlib()
+
+    automatizations = automatization()
 
 
     def __init__(self):
@@ -40,7 +42,7 @@ class menu():
                 *   1. Convertidores                                                                              *
                 *   2. Comprimir y descomprimer archivos                                                          *
                 *   3. Descargar videos de youtube                                                                *
-                *   4. Office y Windows                                                                           *
+                *   4. Organizar archivos                                                                         *
                 *   5. Salir                                                                                      *
                 ***************************************************************************************************   
         ''')
@@ -163,4 +165,7 @@ class menu():
                 case _:
 
                     print(f"Esta opcion no existe{respuesta}")
-                    
+
+    def clean(self):
+
+        self.automatizations.auto()       

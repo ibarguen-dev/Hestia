@@ -119,12 +119,10 @@ class Database():
 
             return "Error: "+ e
 
-
-
     def InsertCloud(self, cloud):
 
         try:
-            self.conn.execute("INSERT INTO cloud VALUES('"+cloud+"')")
+            self.conn.execute("INSERT INTO cloudO VALUES('"+cloud+"')")
 
             self.conn.commit()
 
@@ -143,3 +141,15 @@ class Database():
             return True
         except Exception as e:
             return "Error: " + e
+        
+    def ReadCloud(self):
+
+        try:
+
+            onedrever = self.conn.execute("SELECT * FROM cloudO")
+
+            return onedrever.fetchone()
+        
+        except Exception as e:
+
+            return e

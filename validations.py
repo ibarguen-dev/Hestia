@@ -1,3 +1,5 @@
+from os import path, getlogin
+
 class validation():
 
     def disk(self,name):
@@ -162,3 +164,33 @@ class validation():
                     return "El carácter ingresado no se pude utilizar"
         else:
             return "Excedió  el número de caracteres"
+    
+    def oneDrive(self):
+
+        if  path.exists("C:/Users/"+getlogin()+"/OneDrive"):
+
+            return False
+        
+        else:
+
+            return True
+
+    def documentsNormal(self):   
+
+        if path.exists("C:/Users/"+getlogin()+"/Documents"):
+
+            return "Documents"
+        
+        else:
+
+            return "Documentos"
+    
+    def documentsOneDriver(self):
+
+        if path.exists("C:/Users/"+getlogin()+"/OneDrive/Documents"):
+
+            return "Documents"
+        
+        else:
+
+            return "Documentos"
