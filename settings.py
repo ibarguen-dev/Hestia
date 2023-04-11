@@ -76,7 +76,7 @@ class setting():
                 print(response)
 
                 sleep(10) 
-                
+
         system("cls")          
 
             
@@ -500,20 +500,3 @@ class automatization():
         
 
         self.autolib.documnts(router)
-
-
-
-        
-
-
-        
-
-
-
-
-
-
-
-
-            
-        

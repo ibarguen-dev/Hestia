@@ -1,5 +1,5 @@
 from settings import setting, convert, compressor, youlib, automatization
-
+from os import system
 class menu():
 
     config = setting()
@@ -89,7 +89,7 @@ class menu():
                     break
 
                 case "5":
-
+                    system("cls")
                     break
 
                 case _:
@@ -125,6 +125,7 @@ class menu():
                     break
 
                 case "3":
+                    system("cls")
                     break
 
                 case _:
@@ -159,7 +160,7 @@ class menu():
                     break
 
                 case "3":
-
+                    system("cls")
                     break
 
                 case _:
