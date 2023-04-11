@@ -1,6 +1,2 @@
-database.database
 __pycache__
 manual
-hestia.spec
-dist
-build
