@@ -29,6 +29,7 @@ class setting():
     def __init__(self):
         self.database
         self.user()
+        
 
     def user(self):
         
@@ -43,7 +44,7 @@ class setting():
         
                 if(response == True):
 
-                    self.app()
+                    self.ruta()
 
                     break 
 
@@ -65,7 +66,7 @@ class setting():
 
                 if(response == True):
 
-                    self.app()
+                    self.ruta()
 
                 else:
 
@@ -81,33 +82,6 @@ class setting():
 
             
 
-    def app(self):
-
-        try:
-
-            respuesta  = self.database.ReadSetting()
-
-            if(respuesta == None):
-
-                self.descargas.python()
-
-                self.descargas.rar()
-
-                self.ruta()
-
-                self.database.InsertSettings("1","1")
-
-            elif respuesta == Exception:
-
-                print(respuesta)
-
-            else:
-
-                print("Todos los componentes listos...")
-
-        except Exception as e:
-
-            print("Error:", e)
     
     def ruta(self):
         respuesta = input("Quieres que HESTIA pase tus archivos a otros discos. Ingrese 1 para sí, o enter para no: ")

@@ -36,16 +36,6 @@ class Download():
 
                         remove("C:/Users/"+ getlogin()+ "/Downloads/python-3.11.3.exe")
 
-                        system("python.exe -m pip install --upgrade pip")
-
-                        system("pip install patool")
-
-                        system("pip install pdf2docx")
-
-                        system("pip install Pillow")
-
-                        system("pip install  pytube")
-
                         break
                     except Exception as e:
 
