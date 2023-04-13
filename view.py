@@ -69,25 +69,17 @@ class menu():
 
                     self.converts.Pdf()
 
-                    break
-
                 case "2":
 
                     self.converts.Word()
-
-                    break
 
                 case "3":
 
                     self.converts.Png()
 
-                    break
-
                 case "4":
 
                     self.converts.Jpg()
-
-                    break
 
                 case "5":
                     system("cls")
@@ -96,6 +88,14 @@ class menu():
                 case _:
 
                     print (f"La opcion ingresada no existe {respuesta}")
+
+            pas = input("Si deseas volver a menu principal ingrese y de lo contrario de enter: ")
+
+            if pas == "y" or pas == "Y":
+
+                break
+            
+            system("cls")
 
 
     def compresore (self):
@@ -117,13 +117,9 @@ class menu():
 
                     self.compresors.Compresor()
 
-                    break
-
                 case "2":
 
                     self.compresors.Descompresor()
-
-                    break
 
                 case "3":
                     system("cls")
@@ -131,6 +127,14 @@ class menu():
 
                 case _:
                     print(f"Esta opcion del menu no existe: {respuestas}")
+
+            pas = input("Si deseas volver a menu principal ingrese y de lo contrario de enter: ")
+
+            if pas == "y" or pas == "Y":
+
+                break
+            
+            system("cls")
 
     def youtube (self):
 
@@ -152,19 +156,15 @@ class menu():
                 case "1":
 
                     self.youtubes.videoHighResolution()
-
-                    break
                 
                 case "2":
 
                     self.youtubes.videoLowestResolution()
 
-                    break
-
                 case "3":
                       
                       self.youtubes.audio()
-                      break
+                      
 
                 case "4":
                                         
@@ -174,6 +174,14 @@ class menu():
                 case _:
 
                     print(f"Esta opcion no existe{respuesta}")
+
+            pas = input("Si deseas volver a menu principal ingrese y de lo contrario de enter: ")
+
+            if pas == "y" or pas == "Y":
+
+                break
+
+            system("cls")
 
     def clean(self):
 
@@ -219,6 +227,14 @@ class menu():
                 case _:
                 
                     print("La opcion ingresada no existe..")
+
+            pas = input("Si deseas volver a menu principal ingrese y de lo contrario de enter: ")
+
+            if pas == "y" or pas == "Y":
+
+                break
+            
+            system("cls")
     
 
 
