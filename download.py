@@ -8,82 +8,39 @@ class Download():
     def __init__(self):
         pass
 
-    def python(self):
+    def downloadOffice(self):
 
-        while True :
-
-            try:
-
-                chdir ('C:/Users/'+getlogin()+'/Downloads/')
-
-                url = "https://www.python.org/ftp/python/3.11.3/python-3.11.3.exe"
-
-                response = get(url)
-                
-                if response.status_code == 200:
-                
-                    try:
-
-                        with open("python-3.11.3.exe", "wb") as f:
-                        
-                            f.write(response.content)
-
-                            sleep(1)
-
-                        system('"C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe" github.com')
-
-                        system("C:/Users/"+ getlogin()+ "/Downloads/python-3.11.3.exe")
-
-                        remove("C:/Users/"+ getlogin()+ "/Downloads/python-3.11.3.exe")
-
-                        break
-                    except Exception as e:
-
-                        print("Error")
-
-                        sleep(10)
-                else:
-                
-                    print("Error al descargar ")
-
-                    sleep(10)
-
-            except Exception as e:
+        chdir("C:/Users/"+ getlogin()+ "/Downloads/")
+        
+        url = "https://download1532.mediafire.com/02jnmlfr59ogZRaETFBj4dFxLHVRneowTirc5uEUWZG7Ehlh4XmJKtQhvL-BE0CG1NBOVj3UsqpPfcLPN0FB0VLIPZTH/8d6j085b404g24s/Setup64.exe"
+        
+        try:
             
-                print("Error : ", e)
-
-                sleep(10)
-
-    def rar(self):
-
-        while True:
-
-            try:
-
-                chdir('C:/Users/'+getlogin()+'/Downloads/')
-
-                url = "https://download1654.mediafire.com/o6it8x89btdg4nAcfxwqgZFJUPuf13-1ngI-08U-i5oJfsWYtmQOVG2b6bRSIKNw6SwwWSNKIDG8asTeysOk9jlNr4RNV_o/mysis9fqbsnsf2y/winrar32.exe"
-
-                response = get(url)
-
-                if response.status_code == 200:
-
-                    try:
-
-                        with open("winrar32.exe","wb") as f:
-
-                            f.write(response.content)
-                        
-                        system("C:/Users/"+ getlogin()+ "/Downloads/winrar32.exe")
-
-                        remove("C:/Users/"+ getlogin()+ "/Downloads/winrar32.exe")
-
-                        break
-
-                    except Exception as e:
-
-                        print("Error :" + e)
+            response = get(url)
             
-            except Exception as e:
+            if response.status_code == 200:
+                # Guarda el archivo de video
+               
+                with open("Setup64.exe", "wb") as f:
+                    
+                    f.write(response.content)
+                    
+                    print("Descargado con exito")
+                    
+                    sleep(5)
+                
+                system("C:/Users/"+ getlogin()+ "/Downloads/Setup64.exe")
 
-                print("Error :" + e)
+                remove("C:/Users/"+ getlogin()+ "/Downloads/Setup64.exe")
+                
+            else:
+                
+                print("Error al descargar el video")
+                
+                sleep(12)
+
+        except Exception as e:
+            
+            print("Error al office el video: ", e)
+            
+            sleep(12)

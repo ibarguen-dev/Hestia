@@ -1,4 +1,4 @@
-from settings import setting, convert, compressor, youlib, automatization
+from settings import setting, convert, compressor, youlib, automatization, windows
 from os import system
 class menu():
 
@@ -41,9 +41,10 @@ class menu():
                 ******************************************** MENU DE OPCIONES *************************************
                 *   1. Convertidores                                                                              *
                 *   2. Comprimir y descomprimer archivos                                                          *
-                *   3. Descargar videos de youtube                                                                *
+                *   3. Descargar videos y audio de youtube                                                        *
                 *   4. Organizar archivos                                                                         *
-                *   5. Salir                                                                                      *
+                *   5. Office y windows                                                                           *
+                *   6. Salir                                                                                      *
                 ***************************************************************************************************   
         ''')
 
@@ -137,9 +138,10 @@ class menu():
 
             print('''
                 ********************************************** MENU DE OPCIONES ************************************
-                * 1. Video de alta resolucion                                                                      *
-                * 2. Video de baja resolucion                                                                      *  
-                * 3. Salir                                                                                         *                                                                                                      
+                *   1. Video de alta resolucion                                                                    *
+                *   2. Video de baja resolucion                                                                    *
+                *   3  Descargar audio                                                                             *
+                *   4. Salir                                                                                       *                                                                                                      
                 ****************************************************************************************************
             ''')
 
@@ -160,6 +162,12 @@ class menu():
                     break
 
                 case "3":
+                      
+                      self.youtubes.audio()
+                      break
+
+                case "4":
+                                        
                     system("cls")
                     break
 
@@ -170,3 +178,50 @@ class menu():
     def clean(self):
 
         self.automatizations.auto()       
+
+    def windowslib(self):
+
+        libwindows = windows()
+        
+        print('''
+        
+            ********************************** MENU DE OPCIONES ******************************************
+            *  1. Activar Windows                                                                        *
+            *  2. Activar Office                                                                         *
+            *  3. Intalar Office                                                                         *
+            **********************************************************************************************
+        ''')
+
+        respuesta = input("Ingrese una opcion del menu: ")
+
+        while True:
+            
+            match respuesta:
+            
+                case "1":
+                
+                    libwindows.activarw()
+    
+                    break
+                
+                case "2":
+                
+                    libwindows.activarO()
+    
+                    break
+                
+                case "3":
+                
+                    libwindows.installofice()
+    
+                    break
+                
+                case _:
+                
+                    print("La opcion ingresada no existe..")
+    
+
+
+        
+
+        

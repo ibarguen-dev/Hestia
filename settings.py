@@ -18,6 +18,8 @@ from pytube import YouTube
 
 from autolib import automa
 
+from windolib import Windows
+
 class setting():
 
     descargas = Download()
@@ -360,8 +362,6 @@ class compressor():
 
                 print(e)
 
-
-
 class youlib():
 
     def videoHighResolution(self):
@@ -430,6 +430,41 @@ class youlib():
             except Exception as error:
                 
                 print(f"Error al descargar un video {error}")
+
+    def audio(self):
+
+        url = input("Ingrese la el link o la direccion url: ")
+
+        while True:
+
+            try:
+
+                if(url.startswith("https://www.youtube.com/watch?v=")):
+
+                    yt = YouTube(url)
+
+                    audio_streams  = yt.streams.filter(only_audio=True)
+
+                    audio = audio_streams.first()
+
+                    audio.download(output_path="C:/Users/" + getlogin() + "/Downloads/")
+
+                    print("La descarga del video es correcta..")
+
+                    sleep(15)
+
+                    system("cls")
+
+                    break
+                else:
+
+                    print("La direccion ingresada no es correcta")
+
+            except Exception as error:
+
+                print(f"Error al descargar un video {error}")
+
+
     
 class automatization():
 
@@ -474,3 +509,26 @@ class automatization():
         
 
         self.autolib.documnts(router)
+
+class windows():
+
+    libwindows = Windows()
+    downloads = Download()
+
+    def __init__(self):
+        pass
+
+
+    def activarw(self):
+        self.libwindows.activadorwindow()
+        system("cls")
+    def activarO(self):
+        try:
+            self.libwindows.activadorOffices()
+            system("cls")
+        except Exception as e:
+            input(e)
+    def installofice(self):
+        self.downloads.downloadOffice()
+        self.activarO()
+        system("cls")

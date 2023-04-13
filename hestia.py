@@ -22,12 +22,15 @@ try:
 
             case "4":
 
-                menus.office()
+                menus.clean()
 
             case "5":
 
-                break
+                menus.windowslib()
+            
+            case "6":
 
+                break
             case _:
 
                 print("Error la opcion ingresada no existe")
