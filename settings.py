@@ -23,6 +23,8 @@ from windolib import Windows
 from moviepy.editor import *
 
 from pathlib import Path
+
+from pathlib import Path
 from shutil import move
 
 class setting():
@@ -358,6 +360,22 @@ class convert():
             except Exception as e:
 
                 print(e)
+        
+        def audioHestia(audio):
+
+            video = VideoFileClip(audio)
+
+            sonido = video.audio
+            
+            extension  = audio.split('.mp4')[0]
+           
+            mp3 = extension +".mp3"
+           
+            sonido.write_audiofile(mp3) 
+          
+            sonido.close()
+           
+            video.close()
 
 
 class compressor():
@@ -428,7 +446,12 @@ class compressor():
 
 class youlib():
 
-    def videoHighResolution(self):
+    audioConvert = convert()
+
+    def __init__(self):
+        pass
+
+    def videoHighResolution(self,option):
 
         while True:
             url = input("Ingrese la el link o la direccion url: ")
@@ -436,12 +459,37 @@ class youlib():
 
                 if(url.startswith("https://www.youtube.com/watch?v=")):
 
+                    chdir("C:/Users/" + getlogin() + "/Downloads/")
+
                     yt = YouTube(url)
+                    
+                    if option == "1":
 
-                    videos = yt.streams.get_highest_resolution()
+                        videos = yt.streams.get_highest_resolution()
 
+                        videos.download("C:/Users/" + getlogin() + "/Downloads/")
 
-                    videos.download("C:/Users/" + getlogin() + "/Downloads/")
+                    elif option == "2":
+
+                        videos = yt.streams.get_lowest_resolution()
+
+                        videos.download("C:/Users/" + getlogin() + "/Downloads/")
+
+                    if option == "3":
+
+                        videos = yt.streams.get_lowest_resolution()
+
+                        Path("Audio").mkdir(exist_ok=True)
+
+                        
+
+                        videos.download("C:/Users/" + getlogin() + "/Downloads/Audio/")
+                        
+                        chdir("C:/Users/" + getlogin() + "/Downloads/Audio/")
+                        
+                        for file in listdir():
+
+                            self.audioConvert.mp3.audioHestia(file)
 
                     print("La descarga del video es correcta..")
 
@@ -461,94 +509,6 @@ class youlib():
                 print(f"Error al descargar un video {error}")
 
     
-    def videoLowestResolution(self):
-
-        while True:
-            url = input("Ingrese la el link o la direccion url: ")
-            try:
-
-                if(url.startswith("https://www.youtube.com/watch?v=")):
-
-                    yt = YouTube(url)
-
-                    videos = yt.streams.get_lowest_resolution()
-
-                    videos.download("C:/Users/" + getlogin() + "/Downloads/")
-
-                    print("La descarga del video es correcta..")
-
-                    sleep(15)
-
-                    system("cls")
-
-                    break
-
-                else:
-
-                    print("La direccion ingresada no es correcta")
-
-            except Exception as error:
-                
-                print(f"Error al descargar un video {error}")
-
-    def audio(self):
-        while True:
-
-            url = input("Ingrese la el link o la direccion url: ")
-            
-            try:
-
-                if(url.startswith("https://www.youtube.com/watch?v=")):
-
-                    chdir("C:/Users/" + getlogin() + "/Downloads/")
-
-                    Path("Transformacion").mkdir(exist_ok=True)
-
-                    yt = YouTube(url)
-
-                    audio_streams  = yt.streams.get_lowest_resolution()
-
-                    audio_streams.download("C:/Users/" + getlogin() + "/Downloads/Transformacion/")
-
-                    chdir("C:/Users/" + getlogin() + "/Downloads/Transformacion/")
-
-                    
-
-                    for audio in listdir():
-
-                        video = VideoFileClip(audio)
-
-                        sonido = video.audio
-                        
-                        extension  = audio.split('.mp4')[0]
-                        
-                        mp3 = extension +".mp3"
-                        
-                        sonido.write_audiofile(mp3) 
-
-                        sonido.close()
-                        
-                        video.close()
-                    
-                        move(mp3,"C:/Users/" + getlogin() + "/Downloads/")
-                    
-                    rmdir("C:/Users/" + getlogin() + "/Downloads/Transformacion")
-
-                    print("La descarga del video es correcta..")
-
-                    sleep(15)
-
-                    system("cls")
-
-                    break
-                else:
-
-                    print("La direccion ingresada no es correcta")
-                    pass
-
-            except Exception as error:
-
-                print(f"Error al descargar un video {error}")
 
 
     

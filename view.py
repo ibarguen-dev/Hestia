@@ -155,15 +155,15 @@ class menu():
             
                 case "1":
 
-                    self.youtubes.videoHighResolution()
+                    self.youtubes.videoHighResolution(respuesta)
                 
                 case "2":
 
-                    self.youtubes.videoLowestResolution()
+                    self.youtubes.videoHighResolution(respuesta)
 
                 case "3":
                       
-                      self.youtubes.audio()
+                      self.youtubes.videoHighResolution(respuesta)
                       
 
                 case "4":

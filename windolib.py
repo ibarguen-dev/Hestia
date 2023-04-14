@@ -18,7 +18,9 @@ class Windows():
         
         sleep(1)
         
-        system("for /f %x in ('dir /b ../root/Licenses16/ProPlus2019VL*.xrm-ms') do cscript ospp.vbs /inslic:'../root/Licenses16/%x'")
+        ativador  = "for /f %x in ('dir /b ..\root\Licenses16\ProPlus2019VL*.xrm-ms') do cscript ospp.vbs /inslic: "'"..\root\Licenses16\%x"'
+
+        system(ativador)
         
         sleep(1)
         
