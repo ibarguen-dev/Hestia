@@ -1,4 +1,4 @@
-from settings import setting, convert, compressor, youlib, automatization, windows
+from settings import *
 from os import system
 class menu():
 
@@ -40,7 +40,7 @@ class menu():
         print('''
                 ******************************************** MENU DE OPCIONES *************************************
                 *   1. Convertidores                                                                              *
-                *   2. Comprimir y descomprimer archivos                                                          *
+                *   2. Descomprimer archivos                                                                      *
                 *   3. Descargar videos y audio de youtube                                                        *
                 *   4. Organizar archivos                                                                         *
                 *   5. Office y windows                                                                           *
@@ -104,9 +104,8 @@ class menu():
 
             print('''
                 ********************************************** MENU DE OPCIONES ************************************
-                * 1. Comprimir                                                                                     *
-                * 2. Extraer                                                                                       *
-                * 3. Salir                                                                                         *                                          
+                * 1. Extraer                                                                                       *
+                * 2. Salir                                                                                         *                                          
                 ****************************************************************************************************
             ''')
 
@@ -115,13 +114,8 @@ class menu():
             match respuestas:
                 case "1":
 
-                    self.compresors.Compresor()
-
-                case "2":
-
                     self.compresors.Descompresor()
-
-                case "3":
+                case "2":
                     system("cls")
                     break
 
@@ -151,31 +145,18 @@ class menu():
 
             respuesta = input("Ingrese una opcion del menu: ")
 
-            match  respuesta:
+            if respuesta == "3" or respuesta == "2" or respuesta == "1":
+
+                self.youtubes.videoOrAudio(respuesta)
             
-                case "1":
+            elif respuesta == 4:
+                system("cls")
+                break
+            
+            else:
+                print(f"Esta opcion no existe{respuesta}")
 
-                    self.youtubes.videoHighResolution(respuesta)
-                
-                case "2":
-
-                    self.youtubes.videoHighResolution(respuesta)
-
-                case "3":
-                      
-                      self.youtubes.videoHighResolution(respuesta)
-                      
-
-                case "4":
-                                        
-                    system("cls")
-                    break
-
-                case _:
-
-                    print(f"Esta opcion no existe{respuesta}")
-
-            pas = input("Si deseas volver a menu principal ingrese y de lo contrario de enter: ")
+            pas = input("Ingrse Y se deseas volver al menu principal o de enter para continuarl con la opcion actual")
 
             if pas == "y" or pas == "Y":
 

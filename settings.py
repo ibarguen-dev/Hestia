@@ -12,7 +12,7 @@ from pdf2docx import parse
 
 from PIL import Image
 
-from patoolib import extract_archive, create_archive
+from patoolib import extract_archive
 
 from pytube import YouTube
 
@@ -143,166 +143,99 @@ class setting():
 
 class convert():
 
+    validations = validation()
+
     def __init__(self):
         pass
     
-    def Pdf(self):
 
-        pdf = input("Arraste aqui el pdf para convertir: ")
-
-        if(pdf.endswith(".pdf")):
-
-            rutas = pdf.split(".pdf")
-
-            word =""
-
-            for ruta in rutas:
-
-                word = word + ruta
-
-            word = word + ".docx"
-
-            parse(pdf,word, start=0, end=0)
-
-            print("el archivo ya se a convertido")
-
-        else:
-       
-            print("el archivo ingresado no es pdf") 
+    def files(self,options):
         
-        system("cls")
-    
-    def Word(self):
-
-        word = input("Arraste aqui el word para convertir: ")
-
-        if word.endswith(".docx") or word.endswith(".doc") or word.endswith(".docm") or word.endswith(".dot") or word.endswith(".dotx") or word.endswith(".dotm"):
-
-            rutas = ""
-
-            if word.endswith(".doc"):
-
-                rutas = word.split(".doc")
-
-            elif word.endswith(".doc"):
-
-                rutas = word.split(".doc")
-
-            elif word.endswith(".docm"):
-
-                rutas = word.split(".docm")
-
-            elif word.endswith(".dot"):
-
-                rutas = word.split(".dot")
-
-            elif word.endswith(".dotx"):
-
-                rutas = word.split(".dotx")
-
-            elif word.endswith(".dotm"):
-
-                rutas = word.split(".dotm")
-
-            pdf = ""
-
-            for ruta in rutas:
-
-                pdf = pdf + ruta
-
-            pdf = pdf + "pdf"
-
-            parse(word, pdf, start=0, end=0)
-
-        else:
-
-            print("el archivo ingresado no es word")
-        
-        system("cls")
-
-    def Png(self):
-
-        imagen = input("Arraste aqui la imagen para convertir: ")
-
-        if(imagen.endswith(".jpg") or  imagen.endswith(".webp")):
-
-            extension = ""
-
-            if imagen.endswith(".jpg"):
-
-                extension = imagen.split(".jpg")
-
-            elif imagen.endswith(".webp"):
-
-                extension = imagen.split(".webp")
-
-            png = ""
-
-            for ruta in extension:
-
-                png = png + ruta 
-
-            png = png + ".png"
-
-            print(png)
-
-            im = Image.open(imagen)
-
-            im.save(png)
-
-            im.close()
-
-        else:
-
-            print("El archivo ingresado no es una imagen...")
-        
-        system("cls")
-
-    def Jpg(self):
-
-        imagen = input("Arraste aqui la imagen para convertir: ")
-
         while True:
 
             try:
+                inp = input("Arraste aqui el archivo que desea  convertir: ")
 
-                if(imagen.endswith(".png") or imagen.endswith(".webp")):
+                repuesta = self.validations.files(inp)
 
-                    rutas = ""
+                if repuesta != False:
 
-                    if imagen.endswith(".png"):
+                    output =""
 
-                        ruta = imagen.split(".png")
+                    for ruta in repuesta:
 
-                    elif imagen.endswith(".webp"):
+                        output = output + ruta
 
-                        ruta = imagen.split(".webp")
+                    if options == "1":
 
-                    jpg = ""
+                        output = output + ".docx"
 
-                    for ruta in rutas:
+                    elif options == "2":
+                    
+                        output = output + ".pdf"
 
-                        jpg = jpg + ruta 
+                    parse(inp,output, start=0, end=0)
 
-                    jpg = jpg + ".jpg"
+                    print("el archivo ya se a convertido")
+
+                    break
+                
+                else:
+                
+                    print("el archivo ingresado no es pdf") 
+
+                system("cls")
+            
+            except Exception as e:
+
+                input(e)
+    
+
+    def imagenes(self,options):
+
+        while True:    
+            try:
+                imagen = input("Arraste aqui la imagen que desea convertir: ")
+
+                resultados = self.validations.images(imagen)
+
+                if resultados != False:
+
+                    file = "" 
+
+                    for resultado in resultados:
+
+                        file = file + resultado
+
+                    if options == "1":
+
+                        file = ".png"
+
+                    elif options == "2":
+
+                        file = ".jpg"
 
                     im = Image.open(imagen)
 
-                    im.save(jpg)
+                    im.save(file)
 
                     im.close()
 
-                    break
-                else:
-                    print("El archivo ingresado no es una imagen...")
-                    sleep(15)
-                    system("cls")
-            except Exception as error:
+                    print("La imagen se a convertido")
 
-                print(f"Error al convertir la imagen: %s" % error)
-            
-            system("cls")
-    
+                    sleep(5)
+
+                    break
+
+                else:
+
+                    print("El archivo ingresado no se puede convertir, porfavor intente de nuevo")
+
+            except Exception as e:
+
+                print(e)
+
+
     class mp3():
 
         def __init__(self):
@@ -387,56 +320,14 @@ class compressor():
 
         while True:
 
+
             try:
-
-                if(file.endswith('.rar')):
-
-                    try:
-
-                        file = input("Arraste aqui el archivo a descomprimir: ")
-
-                        extract_archive(file)
-
-                        break
-
-                    except Exception as e:
-
-                        print(e)
-
-                        sleep(30)
 
                 file = input("Arraste aqui el archivo a descomprimir: ")
 
-
                 extract_archive(file)
+
                 print("La extrasion a finalizado correctamente")
-                sleep(15)
-                system("cls")
-                break
-
-            except Exception as e:
-
-                print(e)
-
-                sleep(30)
-
-
-
-    def Compresor(self):
-        
-        while True:
-
-            try:
-
-                file = input("Arraste aqui el archivo a comprimir: ")
-
-                create_archive(file)
-
-                print("La compresion a finalizado correctamente")
-
-                sleep(15)
-
-                system("cls")
 
                 break
 
@@ -444,6 +335,9 @@ class compressor():
 
                 print(e)
 
+                sleep(5)
+
+                
 class youlib():
 
     audioConvert = convert()
@@ -451,7 +345,7 @@ class youlib():
     def __init__(self):
         pass
 
-    def videoHighResolution(self,option):
+    def videoOrAudio(self,option):
 
         while True:
             url = input("Ingrese la el link o la direccion url: ")
@@ -491,6 +385,12 @@ class youlib():
 
                             self.audioConvert.mp3.audioHestia(file)
 
+                            audio = file.split("mp4")[0]
+
+                            move(audio+".mp3","C:/Users/" + getlogin() + "/Downloads/")
+
+                            remove("C:/Users/" + getlogin() + "/Downloads/Audio")
+
                     print("La descarga del video es correcta..")
 
                     sleep(5)
@@ -508,10 +408,6 @@ class youlib():
 
                 print(f"Error al descargar un video {error}")
 
-    
-
-
-    
 class automatization():
 
     data = Database()
@@ -556,25 +452,5 @@ class automatization():
 
         self.autolib.documnts(router)
 
-class windows():
 
-    libwindows = Windows()
-    downloads = Download()
-
-    def __init__(self):
-        pass
-
-
-    def activarw(self):
-        self.libwindows.activadorwindow()
-        system("cls")
-    def activarO(self):
-        try:
-            self.libwindows.activadorOffices()
-            system("cls")
-        except Exception as e:
-            input(e)
-    def installofice(self):
-        self.downloads.downloadOffice()
-        self.activarO()
         system("cls")

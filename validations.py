@@ -194,3 +194,78 @@ class validation():
         else:
 
             return "Documentos"
+    
+    def files(file):
+
+        if file.endswith(".docx") or file.endswith(".doc") or file.endswith(".docm") or file.endswith(".dot") or file.endswith(".dotx") or file.endswith(".dotm")\
+            or file.endswith(".pdf"):
+
+            rutas = ""
+
+            if file.endswith(".doc"):
+
+                rutas = file.split(".doc")[0]
+
+            elif file.endswith(".doc"):
+
+                rutas = file.split(".doc")[0]
+
+            elif file.endswith(".docm"):
+
+                rutas = file.split(".docm")[0]
+
+            elif file.endswith(".dot"):
+
+                rutas = file.split(".dot")[0]
+
+            elif file.endswith(".dotx"):
+
+                rutas = file.split(".dotx")[0]
+
+            elif file.endswith(".dotm"):
+
+                rutas = file.split(".dotm")[0]
+
+            elif file.endswith(".pdf"):
+
+                rutas = file.split(".pdf")[0]
+
+            return rutas
+        
+        else:
+
+            return False
+        
+    def images(imagen):
+
+        if imagen.endswith(".jpg") or imagen.endswith(".webp") or  imagen.endswith(".gif") or imagen.endswith(".tiff") or imagen.endswith(".svg"):
+           
+
+            extension = ""
+
+            if imagen.endswith(".jpg"):
+                
+                extension = imagen.split(".jpg")
+            
+            elif imagen.endswith(".webp"):
+
+                extension = imagen.split(".webp")
+
+            elif imagen.endswith(".gif"):
+
+                extension = imagen.split(".gif")
+
+            elif imagen.endswith(".tiff"):
+
+                extension = imagen.split(".tiff")
+
+            elif imagen.endswith(".svg"):
+
+                extension = imagen.split(".svg")
+
+            return extension
+        
+        else:
+
+            return False
+
