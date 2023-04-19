@@ -195,40 +195,53 @@ class validation():
 
             return "Documentos"
     
-    def files(file):
+    def filesvalidations(self,file):
 
-        if file.endswith(".docx") or file.endswith(".doc") or file.endswith(".docm") or file.endswith(".dot") or file.endswith(".dotx") or file.endswith(".dotm")\
-            or file.endswith(".pdf"):
+        files = ""
+
+        organizar = file.split(" ")
+
+        for i in organizar:
+
+            files = files + i
+
+
+        if files.endswith(".docx") or files.endswith(".doc") or files.endswith(".docm") or files.endswith(".dot") or files.endswith(".dotx") or files.endswith(".dotm")\
+            or files.endswith(".pdf"):
 
             rutas = ""
 
-            if file.endswith(".doc"):
+            if files.endswith(".doc"):
 
-                rutas = file.split(".doc")[0]
+                rutas = files.split(".doc")[0]
 
-            elif file.endswith(".doc"):
+            elif files.endswith(".doc"):
 
-                rutas = file.split(".doc")[0]
+                rutas = files.split(".doc")[0]
 
-            elif file.endswith(".docm"):
+            elif files.endswith(".docm"):
 
-                rutas = file.split(".docm")[0]
+                rutas = files.split(".docm")[0]
 
-            elif file.endswith(".dot"):
+            elif files.endswith(".dot"):
 
-                rutas = file.split(".dot")[0]
+                rutas = files.split(".dot")[0]
 
-            elif file.endswith(".dotx"):
+            elif files.endswith(".dotx"):
 
-                rutas = file.split(".dotx")[0]
+                rutas = files.split(".dotx")[0]
 
-            elif file.endswith(".dotm"):
+            elif files.endswith(".dotm"):
 
-                rutas = file.split(".dotm")[0]
+                rutas = files.split(".dotm")[0]
 
-            elif file.endswith(".pdf"):
+            elif files.endswith(".pdf"):
 
-                rutas = file.split(".pdf")[0]
+                rutas = files.split(".pdf")[0]
+
+            elif files.endswith(".docx"):
+                
+                rutas = files.split(".docx")[0]
 
             return rutas
         
@@ -269,3 +282,25 @@ class validation():
 
             return False
 
+
+    def audiovalidations(self, filename):
+
+        espacios = 0
+
+        for filename in filename.split(" "):
+
+            espacios = espacios + 1
+
+            if  espacios == 1:
+
+                return "Espacios"
+
+            if filename.endswith(".mp4"):
+
+                file = filename.split(".mp4")
+
+                return file
+
+            else:
+
+                return False

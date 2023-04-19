@@ -10,6 +10,8 @@ from validations import validation
 
 from pdf2docx import parse
 
+from docx2pdf  import convert
+
 from PIL import Image
 
 from patoolib import extract_archive
@@ -141,7 +143,7 @@ class setting():
                     input(data)
                 system("cls")
 
-class convert():
+class converts():
 
     validations = validation()
 
@@ -156,7 +158,7 @@ class convert():
             try:
                 inp = input("Arraste aqui el archivo que desea  convertir: ")
 
-                repuesta = self.validations.files(inp)
+                repuesta = self.validations.filesvalidations(inp)
 
                 if repuesta != False:
 
@@ -170,11 +172,13 @@ class convert():
 
                         output = output + ".docx"
 
+                        parse(inp,output, start=0, end=0)
+
                     elif options == "2":
                     
                         output = output + ".pdf"
 
-                    parse(inp,output, start=0, end=0)
+                        convert(inp)
 
                     print("el archivo ya se a convertido")
 
@@ -188,8 +192,7 @@ class convert():
             
             except Exception as e:
 
-                input(e)
-    
+                input(e) 
 
     def imagenes(self,options):
 
@@ -235,36 +238,46 @@ class convert():
 
                 print(e)
 
+    def mp3File(self):
 
-    class mp3():
-
-        def __init__(self):
-            pass
-
-        def oneFile(self):
             try:
-                file = input("Arraste aqui el archivo: ")
+                file = input("Arraste aqui el archivo que desea convertir: ")
 
-                if file.endswith(".mp4"):
+                response = self.validations.audiovalidations(file)
 
-                    video = VideoFileClip(file)
+                if(response != False and response != "Espacios"):
+
+                    convert = response.split(".mp4")[0]
+
+                    video = VideoFileClip(response)
 
                     sonido = video.audio
 
-                    extension  = file.split('.mp4')[0]
-
-                    mp3 = extension +".mp3"
+                    mp3 = convert +".mp3"
 
                     sonido.write_audiofile(mp3) 
 
                     sonido.close()
 
                     video.close()
+
+                elif(response == "Espacios"):
+
+                    print("El archivo ingreasado contiene esapcios porfavor cambie el nombre intentolo de nuevo")
+
+                else:
+                
+                    input("a")
+
             except Exception as e:
 
                 print(e)
 
-        def multiFile():
+
+    def mp3MultiFile():
+            
+        while True:
+
             try:
                 files = input("Arrate aqui la carpeta: ")
 
@@ -290,27 +303,12 @@ class convert():
                     
                         move(mp3,"C:/Users/" + getlogin() + "/Downloads/")
 
+                        break
+
             except Exception as e:
 
                 print(e)
         
-        def audioHestia(audio):
-
-            video = VideoFileClip(audio)
-
-            sonido = video.audio
-            
-            extension  = audio.split('.mp4')[0]
-           
-            mp3 = extension +".mp3"
-           
-            sonido.write_audiofile(mp3) 
-          
-            sonido.close()
-           
-            video.close()
-
-
 class compressor():
 
     def __init__(self):
@@ -340,7 +338,7 @@ class compressor():
                 
 class youlib():
 
-    audioConvert = convert()
+    audioConvert = converts()
 
     def __init__(self):
         pass
@@ -454,3 +452,8 @@ class automatization():
 
 
         system("cls")
+
+
+hola = converts()
+
+hola.mp3File()

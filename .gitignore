@@ -6,3 +6,5 @@ Hestia
 hestia.spec
 .vscode
 dist
+windolibs
+test.py
