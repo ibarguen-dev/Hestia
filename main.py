@@ -14,23 +14,16 @@ try:
 
             case "2":
 
-                menus
+                menus.youtube()
 
             case "3":
 
-                menus.youtube()
+               menus.organaizarArchivos() 
 
             case "4":
 
-                menus.organaizarArchivos()
-
-            case "5":
-
-                menus.windowslib()
-            
-            case "6":
-
                 break
+            
             case _:
 
                 print("Error la opcion ingresada no existe")

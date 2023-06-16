@@ -47,53 +47,62 @@ class automa():
         
         #        
 
-    def files():
+    def files(self):
+
+        chdir("C:/Users/" + getlogin() + "/Downloads/")
         
         for files in listdir():
             #
-            path = chdir("C:/Users/" + getlogin() + "/Downloads/")
-
+            ruta = "C:/Users/" + getlogin() + "/Downloads/"
+            
             if files.endswith(".docx") or files.endswith(".docm") or files.endswith(".dotx") or files.endswith(".dotm"):
             
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
-                    #
-                move(files, path+ "Word/")
+                
+                if not path.exists(ruta+"Word/"+files):
+                    
+                    move(files, ruta+ "Word/")
   
             elif files.endswith(".xlsx") or files.endswith(".xlsm") or files.endswith(".xltx") or files.endswith(".xltm") or files.endswith("xlsb") or files.endswith("xlam"):
 
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
-
-
-                move(files, path + "PowerPoint/")
+                
+                if not path.exists(ruta + "Execel/"+files):
+                
+                    move(files, ruta + "Execel/")
 
             elif files.endswith(".pptx") or files.endswith(".pptm") or files.endswith(".potx") or files.endswith(".potm") or files.endswith(".ppam") or files.endswith(".ppsx") or files.endswith(".ppsm") or files.endswith(".sldx") or files.endswith(".sldm"):
 
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
 
-                move(files, path + "PowerPoint/")
+                if not path.exists(ruta + "PowerPoint/"+files):
+
+                    move(files, ruta + "PowerPoint/")
   
             elif files.endswith(".svg") or files.endswith(".jpg") or files.endswith(".png") or files.endswith(".gif"):
             
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
-                    #
-                move(files, path + "Imagenes y Videos/Imagenes/")
+
+                if not path.exists(ruta + "Imagenes y Videos/Imagenes/"+files):
+
+                    move(files, ruta + "Imagenes y Videos/Imagenes/")
 
                 
             elif files.endswith(".mp4") or files.endswith(".avi") or files.endswith(".mov") or files.endswith(".flv") or files.endswith(".mkv") or files.endswith(".wmv"):
 
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
-                    #
-                move(files, path + "Imagenes y Videos/Videos/")
+
+                if not path.exists(ruta + "Imagenes y Videos/Videos/"+files):
+                
+                    move(files, ruta + "Imagenes y Videos/Videos/")
 
             #        
             elif files.endswith(".pdf"):
             
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
-                    #
-                move(files, path + "PDF/")
 
-            else:
+                if not path.exists(ruta + "PDF/"+files):    
+
+                    move(files, ruta + "PDF/")
+
             
-                chdir("C:/Users/" + getlogin() + "/Downloads/")
-                    #
-                move(files, path + "Otros/")

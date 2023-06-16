@@ -10,7 +10,6 @@ class view():
         self.menu()
         self.viewconvertidores
         self.viewyoutube
-        self.assetsorganizador
         self.assetsorganizador.documnts()
     def menu(self):
 
@@ -33,10 +32,9 @@ class view():
         print('''
                 ******************************************** MENU DE OPCIONES *************************************
                 *   1. Convertidores                                                                              *
-                *   2. Descomprimer archivos                                                                      *
-                *   3. Descargar videos y audio de youtube                                                        *
-                *   4. Organizar archivos                                                                         *
-                *   5. Salir                                                                                      *
+                *   2. Descargar videos y audio de youtube                                                        *
+                *   3. Organizar archivos                                                                         *
+                *   4. Salir                                                                                      *
                 ***************************************************************************************************   
         ''')
 

@@ -1,4 +1,4 @@
-from os import chdir,remove
+from os import chdir,remove,getlogin
 from pytube import YouTube
 from moviepy.editor import *
 class ViewYoutube():
@@ -19,10 +19,10 @@ class ViewYoutube():
                 ****************************************************************************************************
         ''')
 
-        opncion = input("Ingrese una opcion:" )
+        opncion = input("Ingrese una opcion: ")
 
         while True:
-
+            chdir("C:/Users/" + getlogin() + "/Downloads/Imagenes y Videos/Videos") 
             url = input("Ingrese la direccion url: ")
 
             match opncion:
@@ -30,7 +30,7 @@ class ViewYoutube():
                 case "1":
                     if(url != ""):
 
-                        chdir("C:/Users/juane/Escritorio")
+
 
                         video = YouTube(url)
 
@@ -47,7 +47,7 @@ class ViewYoutube():
                 case "2":
                     while True:
                         if(url != ""):
-                            chdir("C:/Users/juane/Escritorio")
+
 
                             video = YouTube(url)
 
@@ -64,22 +64,31 @@ class ViewYoutube():
                 case "3":
                     while True:
                         if(url != ""):
-                            chdir("C:/Users/juane/Escritorio")
+
 
                             nombre = input("Ingrese el nombre del audio: ")
 
-                            video = YouTube(url)
+                            while True:
+                                
+                                if nombre != "":
 
-                            audio = video.streams.filter(only_audio=True).first()
+                                    video = YouTube(url)
 
-                            audio.download(filename=nombre)
+                                    audio = video.streams.filter(only_audio=True).first()
 
-                            clip = AudioFileClip(nombre+".mp4")
+                                    audio.download(filename=nombre)
 
-                            clip.write_audiofile(nombre+".mp3")
+                                    clip = AudioFileClip(nombre+".mp4")
 
-                            remove(nombre+".mp4")
+                                    clip.write_audiofile(nombre+".mp3")
 
+                                    remove(nombre+".mp4")
+
+                                    break
+                                else:
+                                    print("Error no ingreso el nombre del audio")
+
+                                    nombre = input("Ingrese eñ nombre del archivo: ")
 
                             break
                         else:
