@@ -1,6 +1,5 @@
-from os import chdir,remove,getlogin
+from os import chdir,remove,getlogin,system
 from pytube import YouTube
-from moviepy.editor import *
 class ViewYoutube():
 
     def __init__(self):
@@ -8,95 +7,97 @@ class ViewYoutube():
 
     def videos(self):
 
+    
+
         
 
-        print('''
+        while True:
+
+            print('''
                 ********************************************** MENU DE OPCIONES ************************************
                 * 1. Video en alta Resolucion                                                                      *
                 * 2. Video en baja Resolucion                                                                      *
                 * 3. Audio                                                                                         *
                 * 4. Salir                                                                                         *
                 ****************************************************************************************************
-        ''')
+            
+            ''')
 
-        opncion = input("Ingrese una opcion: ")
+            opncion = input("Ingrese una opcion: ")
 
-        while True:
-            chdir("C:/Users/" + getlogin() + "/Downloads/Imagenes y Videos/Videos") 
-            url = input("Ingrese la direccion url: ")
+            chdir("C:/Users/" + getlogin() + "/Downloads/Imagenes y Videos/Videos")
+
+            
 
             match opncion:
 
                 case "1":
-                    if(url != ""):
-
-
-
-                        video = YouTube(url)
-
-                        video.streams.get_highest_resolution().download()
-
-                        break
-
-                    else:
-
-                        print(" Error no ingreso niguna URL")
-
+                    while True:
+                        
                         url = input("Ingrese la direccion url: ")
+                    
+                        if(url != "" and url.startswith("https://www.youtube.com/watch?v=")):
+
+                            video = YouTube(url)
+
+                            video.streams.get_highest_resolution().download()
+                            system("cls")
+                            break
+
+                        else:
+
+                            print(" Error no ingreso URL correcta ")
+
                 
                 case "2":
-                    while True:
-                        if(url != ""):
 
+                    while True:
+
+                        url = input("Ingrese la direccion url: ")
+
+                        if(url != ""and url.startswith("https://www.youtube.com/watch?v=")):
 
                             video = YouTube(url)
 
                             video.streams.get_lowest_resolution().download()
-
+                            system("cls")
                             break
 
                         else:
 
-                            print(" Error no ingreso niguna URL")
+                            print(" Error no ingreso URL correcta ")
 
-                            url = input("Ingrese la direccion url: ")
+                            
                 
                 case "3":
                     while True:
-                        if(url != ""):
+                        url = input("Ingrese la direccion url: ")
 
-
-                            nombre = input("Ingrese el nombre del audio: ")
+                        if(url != "" and url.startswith("https://www.youtube.com/watch?v=")):
 
                             while True:
-                                
+                                nombre = input("Ingrese el nombre del audio: ")    
                                 if nombre != "":
 
                                     video = YouTube(url)
 
-                                    audio = video.streams.filter(only_audio=True).first()
+                                    audio_stream = video.streams.filter(only_audio=True).first()
 
-                                    audio.download(filename=nombre)
-
-                                    clip = AudioFileClip(nombre+".mp4")
-
-                                    clip.write_audiofile(nombre+".mp3")
-
-                                    remove(nombre+".mp4")
+                                    audio_stream.download(filename= nombre+".mp3")
+                                    
+                                    system("cls")
 
                                     break
                                 else:
-                                    print("Error no ingreso el nombre del audio")
 
-                                    nombre = input("Ingrese eñ nombre del archivo: ")
+                                    print("No ingreso el nombre del audio")
 
                             break
-                        else:
-                            print(" Error no ingreso niguna URL")
 
-                            url = input("Ingrese la direccion url: ")
-                
+                        else:
+                            print(" Error no ingreso URL correcta ")
                 case "4":
+                    
                     break
 
                 case _:
