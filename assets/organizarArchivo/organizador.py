@@ -1,7 +1,7 @@
 from os import chdir, listdir, path, getlogin
 from pathlib import Path
 from shutil import move
-
+from time import sleep 
 
 class automa():
 
@@ -62,15 +62,23 @@ class automa():
                 if not path.exists(ruta+"Word/"+files):
                     
                     move(files, ruta+ "Word/")
+                else:
+
+                    print(f"El archivo {files} ya se encuentra en la carpeta de Word")
+
+                    sleep(5)
   
             elif files.endswith(".xlsx") or files.endswith(".xlsm") or files.endswith(".xltx") or files.endswith(".xltm") or files.endswith("xlsb") or files.endswith("xlam"):
 
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
                 
-                if not path.exists(ruta + "Execel/"+files):
+                if not path.exists(ruta + "Excel/"+files):
                 
-                    move(files, ruta + "Execel/")
-
+                    move(files, ruta + "Excel/")
+                else:
+                    print(f"El archivo {files} ya se encuentra en la carpeta de Excel") 
+                    
+                    sleep(5)
             elif files.endswith(".pptx") or files.endswith(".pptm") or files.endswith(".potx") or files.endswith(".potm") or files.endswith(".ppam") or files.endswith(".ppsx") or files.endswith(".ppsm") or files.endswith(".sldx") or files.endswith(".sldm"):
 
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
@@ -78,7 +86,12 @@ class automa():
                 if not path.exists(ruta + "PowerPoint/"+files):
 
                     move(files, ruta + "PowerPoint/")
-  
+                else:
+
+                    print(f"El archivo {files} ya se encuentra en la carpeta de PowerPoint")
+
+                    sleep(5)
+
             elif files.endswith(".svg") or files.endswith(".jpg") or files.endswith(".png") or files.endswith(".gif"):
             
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
@@ -86,8 +99,12 @@ class automa():
                 if not path.exists(ruta + "Imagenes y Videos/Imagenes/"+files):
 
                     move(files, ruta + "Imagenes y Videos/Imagenes/")
+                else:
 
-                
+                    print(f"El archivo {files} ya se encuentra en la carpeta de Imagen")
+
+                    sleep(5)
+
             elif files.endswith(".mp4") or files.endswith(".avi") or files.endswith(".mov") or files.endswith(".flv") or files.endswith(".mkv") or files.endswith(".wmv"):
 
                 chdir("C:/Users/" + getlogin() + "/Downloads/")
@@ -95,7 +112,10 @@ class automa():
                 if not path.exists(ruta + "Imagenes y Videos/Videos/"+files):
                 
                     move(files, ruta + "Imagenes y Videos/Videos/")
+                else:
+                    print(f"El archivo {files} ya se encuentra en la carpeta de Videos")
 
+                    sleep(5)
             #        
             elif files.endswith(".pdf"):
             
@@ -104,5 +124,8 @@ class automa():
                 if not path.exists(ruta + "PDF/"+files):    
 
                     move(files, ruta + "PDF/")
+                else:
+                    print(f"El archivo {files} ya se encuentra en la carpeta de PDF")
 
+                    sleep(5)
             

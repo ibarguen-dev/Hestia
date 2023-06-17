@@ -62,14 +62,14 @@ class convertidoresConfig():
 
             print('''
                 ********************************************** ADVERTENCIA *****************************************
-                * La aplicacion solo puede convertir documentos de word .docx                                      *
+                * La aplicación solo puede convertir documentos de Word con extensión .docx                        *
                 ****************************************************************************************************
             ''')
 
             print('''
                 ********************************************** MENU DE OPCIONES ************************************
-                * 1. convertir PDF a WORD                                                                          *
-                * 2. convertir WORD a PDF                                                                          *
+                * 1. Convertir PDF a WORD                                                                          *
+                * 2. Convertir WORD a PDF                                                                          *
                 ****************************************************************************************************
             ''')
 
@@ -99,13 +99,13 @@ class convertidoresConfig():
                         output = output + ".pdf"
                         convert(archivo,output)
 
-                    print("el archivo ya se a convertido")
+                    print("El archivo ya se Ha convertido")
 
                     break
                 
                 else:
                 
-                    print("el archivo ingresado no es pdf") 
+                    print("El archivo ingresado no se puede convertir") 
 
                 system("cls")
             
@@ -165,9 +165,9 @@ class convertidoresConfig():
                     * 2. convertir A JPG                                                                               *
                     ****************************************************************************************************
                 ''')
-                options = input("Ingrese uana opcion: ")
+                options = input("Ingrese una opción: ")
                 if(options == "1" or options == "2"):
-                    imagen = input("Arraste aqui la imagen que desea convertir: ")
+                    imagen = input("Arreste aquí la imagen que desea convertir: ")
 
                     resultados = self.validadorImagen(imagen)
 
@@ -193,15 +193,17 @@ class convertidoresConfig():
 
                         im.close()
 
-                        print("La imagen se a convertido")
+                        print("La imagen se ha convertido")
 
                         sleep(5)
 
+                        system("cls")
+
                         break
                     else:
-                        print("El archivo ingresado no se puede convertir, porfavor intente de nuevo")   
+                        print("El archivo ingresado no se puede convertir, por favor intente de nuevo")   
                 else:
-                    print("La opcion ingresada no existe")   
+                    print("La opción ingresada no existe")   
                         
 
             except Exception as e:

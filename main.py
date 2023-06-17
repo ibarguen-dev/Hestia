@@ -4,7 +4,7 @@ try:
 
         menus = view()
         
-        respusta = input("Porfavor ingrese una opcionde la lista del menu: ")
+        respusta = input("Por favor ingrese una opción de la lista: ")
 
         match respusta:
 
@@ -26,7 +26,7 @@ try:
             
             case _:
 
-                print("Error la opcion ingresada no existe")
+                print("Error la opción ingresada no existe")
 
 except Exception as e:
 
