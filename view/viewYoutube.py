@@ -42,7 +42,12 @@ class ViewYoutube():
 
                             video.streams.get_highest_resolution().download()
                             system("cls")
-                            break
+
+                            r = input("Si deseas no seguir descargandos audios ingrese [y]")
+                            
+                            if(r == "y" or r == "Y"):
+                            
+                                break
 
                         else:
 
@@ -61,7 +66,12 @@ class ViewYoutube():
 
                             video.streams.get_lowest_resolution().download()
                             system("cls")
-                            break
+                            r = input("Si deseas no seguir descargandos audios ingrese [y]")
+
+                            
+                            if(r == "y" or r == "Y"):
+                            
+                                break
 
                         else:
 
@@ -71,6 +81,12 @@ class ViewYoutube():
                 
                 case "3":
                     while True:
+
+                        print(''' 
+                            ******************************** Informacion ***************************
+                            *Los audios descargados estaran descargados en la carpeta Videos       *
+                            ************************************************************************
+                        ''')
                         url = input("Ingrese la direccion url: ")
 
                         if(url != "" and url.startswith("https://www.youtube.com/watch?v=")):
@@ -92,7 +108,11 @@ class ViewYoutube():
 
                                     print("No ingreso el nombre del audio")
 
-                            break
+                            r = input("Si deseas no seguir descargandos audios ingrese [y]")
+
+                            if(r == "y" or r == "Y"):
+                                
+                                break
 
                         else:
                             print(" Error no ingreso URL correcta ")
