@@ -42,7 +42,11 @@ class ViewYoutube():
 
                             video.streams.get_highest_resolution().download()
                             system("cls")
-
+                            print(''' 
+                                ******************************** Informacion ***************************
+                                * Descarga complecta                                                   *
+                                ************************************************************************
+                            ''')
                             r = input("Si deseas no seguir descargandos audios ingrese [y]")
                             
                             if(r == "y" or r == "Y"):
@@ -66,8 +70,14 @@ class ViewYoutube():
 
                             video.streams.get_lowest_resolution().download()
                             system("cls")
-                            r = input("Si deseas no seguir descargandos audios ingrese [y]")
 
+                            print(''' 
+                                ******************************** Informacion ***************************
+                                * Descarga complecta                                                   *
+                                ************************************************************************
+                            ''')
+
+                            r = input("Si deseas no seguir descargandos audios ingrese [y]")
                             
                             if(r == "y" or r == "Y"):
                             
@@ -109,6 +119,12 @@ class ViewYoutube():
                                     print("No ingreso el nombre del audio")
 
                             r = input("Si deseas no seguir descargandos audios ingrese [y]")
+
+                            print(''' 
+                                ******************************** Informacion ***************************
+                                * Descarga complecta                                                   *
+                                ************************************************************************
+                            ''')
 
                             if(r == "y" or r == "Y"):
                                 
