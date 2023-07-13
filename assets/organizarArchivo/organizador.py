@@ -20,9 +20,6 @@ class automa():
         Path("Word").mkdir(exist_ok=True)
 
         #
-        Path("Ejecutables").mkdir(exist_ok=True)
-
-        #
         Path("Imagenes y Videos").mkdir(exist_ok=True)
 
         #
@@ -125,6 +122,19 @@ class automa():
 
                     move(files, ruta + "PDF/")
                 else:
+                    print(f"El archivo {files} ya se encuentra en la carpeta de PDF")
+
+                    sleep(5)
+            else:
+
+                chdir("C:/Users/" + getlogin() + "/Downloads/")
+
+                if(files != "Word" or files != "PDF" or files != "Imagenes y Videos" or files != "Excel" or files != "PowerPoint"):
+                     
+                    move(files,ruta + "Otros")
+                
+                else:
+                    
                     print(f"El archivo {files} ya se encuentra en la carpeta de PDF")
 
                     sleep(5)
