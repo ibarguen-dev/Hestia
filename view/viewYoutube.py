@@ -15,15 +15,15 @@ class ViewYoutube():
 
             print('''
                 ********************************************** MENU DE OPCIONES ************************************
-                * 1. Video en alta Resolucion                                                                      *
-                * 2. Video en baja Resolucion                                                                      *
+                * 1. Video en alta resolución                                                                      *
+                * 2. Video en baja resolución                                                                      *
                 * 3. Audio                                                                                         *
                 * 4. Salir                                                                                         *
                 ****************************************************************************************************
             
             ''')
 
-            opncion = input("Ingrese una opcion: ")
+            opncion = input("Ingrese una opción: ")
 
             chdir("C:/Users/" + getlogin() + "/Downloads/Imagenes y Videos/Videos")
 
@@ -34,7 +34,7 @@ class ViewYoutube():
                 case "1":
                     while True:
                         
-                        url = input("Ingrese la direccion url: ")
+                        url = input("Ingrese la dirección url: ")
                     
                         if(url != "" and url.startswith("https://www.youtube.com/watch?v=")):
 
@@ -44,10 +44,10 @@ class ViewYoutube():
                             system("cls")
                             print(''' 
                                 ******************************** Informacion ***************************
-                                * Descarga complecta                                                   *
+                                * Descarga completa                                                    *
                                 ************************************************************************
                             ''')
-                            r = input("Si deseas no seguir descargandos audios ingrese [y]")
+                            r = input("Si deseas no seguir descargando mas videos de alta ingrese [y]")
                             
                             if(r == "y" or r == "Y"):
                             
@@ -55,14 +55,14 @@ class ViewYoutube():
 
                         else:
 
-                            print(" Error no ingreso URL correcta ")
+                            print(" La dirección URL ingresada invalida")
 
                 
                 case "2":
 
                     while True:
 
-                        url = input("Ingrese la direccion url: ")
+                        url = input("Ingrese la dirección url:")
 
                         if(url != ""and url.startswith("https://www.youtube.com/watch?v=")):
 
@@ -77,7 +77,7 @@ class ViewYoutube():
                                 ************************************************************************
                             ''')
 
-                            r = input("Si deseas no seguir descargandos audios ingrese [y]")
+                            r = input(" Si deseas no seguir descargando mas  videos de baja ingrese [y]")
                             
                             if(r == "y" or r == "Y"):
                             
@@ -85,7 +85,7 @@ class ViewYoutube():
 
                         else:
 
-                            print(" Error no ingreso URL correcta ")
+                            print(" La dirección URL ingresada invalida ")
 
                             
                 
@@ -97,12 +97,13 @@ class ViewYoutube():
                             *Los audios descargados estaran descargados en la carpeta Videos       *
                             ************************************************************************
                         ''')
-                        url = input("Ingrese la direccion url: ")
+                        url = input("Ingrese la dirección url: ")
 
                         if(url != "" and url.startswith("https://www.youtube.com/watch?v=")):
 
                             while True:
-                                nombre = input("Ingrese el nombre del audio: ")    
+                                nombre = input("Ingrese el nombre del audio: ")
+
                                 if nombre != "":
 
                                     video = YouTube(url)
@@ -118,7 +119,7 @@ class ViewYoutube():
 
                                     print("No ingreso el nombre del audio")
 
-                            r = input("Si deseas no seguir descargandos audios ingrese [y]")
+                            r = input("Si deseas no seguir descargando mas audios ingrese [y]")
 
                             print(''' 
                                 ******************************** Informacion ***************************
@@ -131,11 +132,11 @@ class ViewYoutube():
                                 break
 
                         else:
-                            print(" Error no ingreso URL correcta ")
+                            print(" La dirección URL ingresada invalida ")
                 case "4":
                     
                     break
 
                 case _:
 
-                    print(" La opcion ingrsada no existe")
+                    print(" La opción ingresada no existe")
