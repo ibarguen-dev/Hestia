@@ -1,88 +1,52 @@
 from tkinter import *
+from customtkinter import *
 from tkinter import messagebox
 from tkinter import  filedialog
-from controlador import yotubeControlador
-from controlador import  pdfwordControlador
+from controlador.yotubeControlador import youtubeController
+from controlador.pdfwordControlador import  PdfWord
 class Vista:
 
     def __init__(self):
+        set_appearance_mode("System")
+        self.__youtube = youtubeController()
 
-        self.__youtube = yotubeControlador.youtubeController()
+        self.__convertidoresDocumentos = PdfWord()
 
-        self.__convertidoresDocumentos = pdfwordControlador.PdfWord()
-
-        self.__ventana = Tk()
+        self.__ventana = CTk()
 
         self.__ventana.title("Hestia")
 
-        self.__ventana.geometry("400x350")
-
-        self.__barraMenu = Menu(self.__ventana)
-
-        self.__ventana.config(menu=self.__barraMenu, width=550, height=550)
-# ----------------------------------------------------------------------------------------------------------------------
-        self.__inicioMenu = Menu(self.__barraMenu, tearoff=0)
-        self.__inicioMenu.add_command(label="Abrir",command=lambda: self.__mostrar_ventanas("Inicio"))
-#-----------------------------------------------------------------------------------------------------------------------
-        self.__convertidoresMenu = Menu(self.__barraMenu,tearoff=0)
-
-        self.__convertidoresMenu.add_command(label="Convertir PDF a WORD o WORD a PDF",command=lambda: self.__mostrar_ventanas("Documentos"))
-
-        self.__convertidoresMenu.add_separator()
-
-        self.__convertidoresMenu.add_command(label="Convertir Imagen A PNG o JPG",command=lambda:self.__mostrar_ventanas("Imagenes"))
-
-#-----------------------------------------------------------------------------------------------------------------------
-
-        self.__youtubeMenu = Menu(self.__barraMenu,tearoff=0)
-        self.__youtubeMenu.add_command(label="Abrir",command=lambda :self.__mostrar_ventanas("Youtube"))
-#-----------------------------------------------------------------------------------------------------------------------
-
-        self.__configuracionMenu = Menu(self.__barraMenu, tearoff=0)
-
-        self.__configuracionMenu.add_command(label="Cambiar el disco duro")
-
-        self.__configuracionMenu.add_command(label="Buscar actualizaciones")
-
-        self.__configuracionMenu.add_command(label="Cambiar el color")
+        self.__ventana.geometry("700x550")
 
 
-#-----------------------------------------------------------------------------------------------------------------------
+        self.__ventana.grid_rowconfigure(0, weight=1)
 
-        self.__ayudaMenu = Menu(self.__barraMenu,tearoff=0)
+        self.__menu = CTkFrame(self.__ventana)
 
-        self.__ayudaMenu.add_command(label="Manual de hestia")
+        self.__menu.grid(row=0,column=0,padx=10, pady=(10, 0),sticky="nsew" )
 
-        self.__ayudaMenu.add_command(label="Acerca de...")
+        self.__menuInicio = CTkButton(self.__menu,text="Inicio",command=lambda:self.__mostrar_ventanas("Inicio"))
 
-        self.__ayudaMenu.add_command(label="Licencia")
+        self.__menuInicio.grid(row=0,column=0,padx=10, pady=(10, 0),sticky="w")
 
-#-----------------------------------------------------------------------------------------------------------------------
-        self.__barraMenu.add_cascade(label="Inicio",menu=self.__inicioMenu)
+        self.__menuYoutube = CTkButton(self.__menu,text="Youtube",command=lambda:self.__mostrar_ventanas("Youtube"))
 
-        self.__barraMenu.add_cascade(label="Convertidores", menu=self.__convertidoresMenu)
+        self.__menuYoutube.grid(row=1,column=0,padx=10, pady=(10, 0),sticky="w")
 
-        self.__barraMenu.add_cascade(label="Youtube", menu=self.__youtubeMenu)
 
-        self.__barraMenu.add_cascade(label="Configuracion", menu=self.__configuracionMenu)
+        self.__frameInicio = CTkFrame(self.__ventana,width=200, height=200)
 
-        self.__barraMenu.add_cascade(label="Ayuda", menu=self.__ayudaMenu)
-#-----------------------------------------------------------------------------------------------------------------------
 
-        self.__vistaInicio = Frame(self.__ventana)
 
-        self.__vistaYoutube = Frame(self.__ventana)
+        self.__frameYoutube = CTkFrame(self.__ventana)
 
-        self.__vistaDocumento =Frame(self.__ventana)
+        self.__mostrar_ventanas("Inicio")
 
-        self.__vistaImagen = Frame(self.__ventana)
-
+        self.__ventanaEmergenteRaiz = None
 
     def __ocultar_ventanas(self):
-        self.__vistaInicio.pack_forget()
-        self.__vistaYoutube.pack_forget()
-        self.__vistaDocumento.pack_forget()
-        self.__vistaImagen.pack_forget()
+        self.__frameInicio.grid_forget()
+        self.__frameYoutube.grid_forget()
 
     def __mostrar_ventanas(self,nombre):
 
@@ -90,21 +54,27 @@ class Vista:
 
         if (nombre == "Inicio"):
 
-            self.__vistaInicio.pack()
+            self.__frameInicio.grid(row=0,column=3,sticky="n",padx=50)
 
-            self.__titulo = Label(self.__vistaInicio, text="Hestia", font=("Arial", 50))
+            self.__frameInicio.grid_columnconfigure(0,weight=3)
 
-            self.__titulo.grid(row=0, column=0)
+            self.__titulo = CTkLabel(self.__frameInicio, text="Hestia", font=("Arial", 50))
 
-            self.__informacion = Label(self.__vistaInicio, text="Organizar archivos", font=("Arial", 12))
+            self.__titulo.grid(row=1,column=0,padx=100,pady=20,columnspan=2)
 
-            self.__informacion.grid(row=1, column=0)
+            self.__informacionInicio = CTkLabel(self.__frameInicio, text="Organizar archivos", font=("Arial", 20))
 
-            self.__button = Button(self.__vistaInicio, text="Aceptar", font=("Arial", 12))
+            self.__informacionInicio.grid(row=2,column=0,pady=20)
 
-            self.__button.grid(row=3, column=0)
+            self.__buttonInicioInformacion = CTkButton(self.__frameInicio, text="Información", font=("Arial", 12),command=lambda:self.__Manual("Inicio"))
 
-        elif (nombre == "Youtube"):
+            self.__buttonInicioInformacion.grid(row=2,column=1,columnspan=2)
+
+            self.__buttonInicio = CTkButton(self.__frameInicio, text="Aceptar", font=("Arial", 20))
+
+            self.__buttonInicio.grid(row=3,column=0,pady=20 ,padx=15,columnspan=2,sticky="ew")
+
+        '''elif (nombre == "Youtube"):
 
             self.__vistaYoutube.pack()
 #-----------------------------------------------------------------------------------------------------------------------
@@ -173,16 +143,16 @@ class Vista:
 
             self.__botonJpg =Button(self.__vistaImagen,text="Convertir a jpg",font=("Arial,12"))
 
-            self.__botonJpg.grid(row=3,column=0)
+            self.__botonJpg.grid(row=3,column=0)'''
 
 
     def iniciar_aplicacion(self):
-        self.__mostrar_ventanas("Inicio")
+        '''self.__mostrar_ventanas("Inicio")'''
         self.__ventana.mainloop()
 
 
     def __SubirDocumentos(self,documento):
-        self.__subirDocumento = filedialog.askopenfilename(title="Abrir")
+        self.__subirDocumento = filedialog.askopenfilenames(title="Abrir")
         archivo = self.__subirDocumento
 
 
@@ -249,10 +219,7 @@ class Vista:
 
                 nombre = archivo.split(".svg")[0]
 
-
-
-
-    def __Word_Pdf(self,documento,archivo):
+    def __Word_Pdf(self,archivo):
         nombre = None
         mensaje = None
         if archivo.endswith(".docx"):
@@ -273,16 +240,39 @@ class Vista:
 
         self.__Notificacion(estado, mensaje)
 
+
+
+    def __Manual(self,tipo):
+        ventanaEmergente = CTkToplevel(self.__ventana)
+
+        ventanaEmergente.geometry("400x300")
+
+        manual = None
+
+        if(tipo == "Inicio"):
+            manual = CTkLabel(ventanaEmergente,text="Hola mundo")
+            manual.pack()
+        elif(tipo):
+            pass
+        elif(tipo):
+            pass
+        elif(tipo):
+            pass
+
+        if self.__ventanaEmergenteRaiz is None or not self.__ventanaEmergenteRaiz.winfo_exists():
+            self.__ventanaEmergenteRaiz = ventanaEmergente  # create window if its None or destroyed
+        else:
+            self.__ventanaEmergenteRaiz.focus()  # if window exists focus it
+
+
     def __Notificacion(self,estado,mensaje):
 
-        if(estado == 0):
+        #if(estado == 0):
             messagebox.showinfo("Exito",mensaje)
-        else:
-            messagebox.showerror("Error",mensaje)
+        #else:
+         #   messagebox.showerror("Error",mensaje)
 
 
-vista = Vista()
-vista.iniciar_aplicacion()
 
 
 
