@@ -1,5 +1,10 @@
 from view.Vista import Vista
-try:
+
+from controlador.ControladorConfiguraciones import Configuraciones
+
+
+test = Configuraciones()
+'''try:
 
     vista = Vista()
 
@@ -10,4 +15,4 @@ except Exception as e:
 
     input(e)
 
-    #Hacaer 
+    #Hacaer '''
