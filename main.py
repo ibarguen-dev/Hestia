@@ -1,6 +1,6 @@
 from view.Vista import Vista
 
-from controlador.ControladorConfiguraciones import Configuraciones
+from controlador.controladorConfiguraciones import Configuraciones
 
 
 test = Configuraciones()

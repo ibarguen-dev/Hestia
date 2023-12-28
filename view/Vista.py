@@ -2,8 +2,8 @@ from tkinter import *
 from customtkinter import *
 from tkinter import messagebox
 from tkinter import  filedialog
-from controlador.yotubeControlador import youtubeController
-from controlador.pdfwordControlador import  PdfWord
+from controlador.controladorYotube import youtubeController
+from controlador.controladorPdfWord import  PdfWord
 class Vista:
 
     def __init__(self):
