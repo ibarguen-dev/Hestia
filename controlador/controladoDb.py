@@ -37,12 +37,15 @@ class BaseDatos():
             conexion.close()
 
     def devolverDatos(self):
-
+        listaDatos = {}
         conexion = self.baseDatos.connect("hestia.db")
         try:
-            Datos = conexion.execute("SELECT * FROM configuraciones")
+            datos = conexion.execute("SELECT * FROM configuraciones")
 
-            return [0, Datos]
+            for fila in datos:
+                listaDatos = {"color":fila[0],"ubicacion":fila[1]}
+
+            return [0, listaDatos]
 
         except self.baseDatos.OperationalError as e:
             print(e)

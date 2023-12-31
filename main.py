@@ -3,16 +3,25 @@ from view.Vista import Vista
 from controlador.controladorConfiguraciones import Configuraciones
 
 
-test = Configuraciones()
-'''try:
+try:
 
-    vista = Vista()
+    configuracionObjecto = Configuraciones()
 
-    vista.iniciar_aplicacion()
+    resultadoBaseDatos  = configuracionObjecto.datosBaseDatos()
 
+    if(resultadoBaseDatos[0] == 0):
+
+        diccionarioDatos = resultadoBaseDatos[1].copy()
+
+        vista = Vista(diccionarioDatos["color"],diccionarioDatos["ubicacion"])
+
+        vista.iniciar_aplicacion()
+
+    else:
+
+        print("error")
 
 except Exception as e:
 
-    input(e)
+    print(e)
 
-    #Hacaer '''
