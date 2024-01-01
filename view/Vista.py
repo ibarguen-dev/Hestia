@@ -81,34 +81,36 @@ class Vista:
         elif (nombre == "Youtube"):
 
             self.__frameYoutube.grid(row=0,column=3,sticky="n",padx=50)
+
+            self.__frameYoutube.grid_columnconfigure(0,weight=3)
 #-----------------------------------------------------------------------------------------------------------------------
             self.__titulo = CTkLabel(self.__frameYoutube, text="Hestia", font=("Arial", 50))
 
-            self.__titulo.grid(row=0, column=0)
+            self.__titulo.grid(row=0,column=0,padx=100,pady=20,columnspan=2)
 #-----------------------------------------------------------------------------------------------------------------------
             self.__informacion = CTkLabel(self.__frameYoutube, text="Descargar videos o audios de youtube", font=("Arial", 15))
 
-            self.__informacion.grid(row=1, column=0,)
+            self.__informacion.grid(row=1, column=0)
 #-----------------------------------------------------------------------------------------------------------------------
-            self.__link = CTkLabel(self.__frameYoutube, text="Ingrear Link", font=("Arial", 10))
+            self.__link = CTkLabel(self.__frameYoutube, text="Ingrear Link", font=("Arial", 15))
 
             self.__link.grid(row=2, column=0)
 #----------------------------------------------------------------------------------------------------------------------
             self.__input = CTkEntry(self.__frameYoutube)
 
-            self.__input.grid(row=3, column=0)
+            self.__input.grid(row=3, column=0,pady=20)
 
             self.__ButonAlta = CTkButton(self.__frameYoutube,text="Alta calidad",)#command=lambda:self.__Youtube("Alta") )
 
-            self.__ButonAlta.grid(row=4, column=0)
+            self.__ButonAlta.grid(row=4, column=0,pady=5)
 
             self.__ButonBaja = CTkButton(self.__frameYoutube,text="Baja calidad",)#command=lambda:self.__youtube("Baja"))
 
-            self.__ButonBaja.grid(row=5, column=0)
+            self.__ButonBaja.grid(row=5, column=0,pady=5)
 
             self.__ButonAudio = CTkButton(self.__frameYoutube,text="Audios",)#command=lambda:self.__youtube("Audios"))
 
-            self.__ButonAudio.grid(row=6, column=0)
+            self.__ButonAudio.grid(row=6, column=0,pady=5)
 
 #-----------------------------------------------------------------------------------------------------------------------
 
