@@ -3,3 +3,5 @@ main.spec
 build
 venv
 hestia.db
+view.py
+viewConvertidores.py
