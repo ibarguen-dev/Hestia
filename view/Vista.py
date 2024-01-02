@@ -1,20 +1,27 @@
 from tkinter import *
 from customtkinter import *
 from tkinter import messagebox
-from tkinter import  filedialog
-#from controlador.controladorYotube import youtubeController
-#from controlador.controladorPdfWord import  PdfWord
+from tkinter import filedialog
+# from controlador.controladorYotube import controladorYoutube
+# from controlador.controladorPdfWord import  controladorPdfWord
+from controlador.controladorOrganizador import controladorOrganizador
+
+
 class Vista:
 
-    def __init__(self,color,ubicacion):
+    def __init__(self, color, ubicacion):
 
         self.__color = color
+
         self.__ubicacion = ubicacion
+
+        # self.__youtube = controladorYoutube()
+
+        # self.__convertidoresDocumentos = controladorPdfWord()
+
+        self.__organizador = controladorOrganizador(self.__ubicacion)
+
         set_appearance_mode(self.__color)
-
-        #self.__youtube = youtubeController()
-
-        #self.__convertidoresDocumentos = PdfWord()
 
         self.__ventana = CTk()
 
@@ -22,25 +29,21 @@ class Vista:
 
         self.__ventana.geometry("700x550")
 
-
         self.__ventana.grid_rowconfigure(0, weight=1)
 
         self.__menu = CTkFrame(self.__ventana)
 
-        self.__menu.grid(row=0,column=0,padx=10, pady=(10, 0),sticky="nsew" )
+        self.__menu.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsew")
 
-        self.__menuInicio = CTkButton(self.__menu,text="Inicio",command=lambda:self.__mostrar_ventanas("Inicio"))
+        self.__menuInicio = CTkButton(self.__menu, text="Inicio", command=lambda: self.__mostrar_ventanas("Inicio"))
 
-        self.__menuInicio.grid(row=0,column=0,padx=10, pady=(10, 0),sticky="w")
+        self.__menuInicio.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="w")
 
-        self.__menuYoutube = CTkButton(self.__menu,text="Youtube",command=lambda:self.__mostrar_ventanas("Youtube"))
+        self.__menuYoutube = CTkButton(self.__menu, text="Youtube", command=lambda: self.__mostrar_ventanas("Youtube"))
 
-        self.__menuYoutube.grid(row=1,column=0,padx=10, pady=(10, 0),sticky="w")
+        self.__menuYoutube.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="w")
 
-
-        self.__frameInicio = CTkFrame(self.__ventana,width=200, height=200)
-
-
+        self.__frameInicio = CTkFrame(self.__ventana, width=200, height=200)
 
         self.__frameYoutube = CTkFrame(self.__ventana)
 
@@ -52,70 +55,78 @@ class Vista:
         self.__frameInicio.grid_forget()
         self.__frameYoutube.grid_forget()
 
-    def __mostrar_ventanas(self,nombre):
+    def __mostrar_ventanas(self, nombre):
 
         self.__ocultar_ventanas()
 
-        if (nombre == "Inicio"):
+        if nombre == "Inicio":
 
-            self.__frameInicio.grid(row=0,column=3,sticky="n",padx=50)
+            self.__frameInicio.grid(row=0, column=3, sticky="n", padx=50)
 
-            self.__frameInicio.grid_columnconfigure(0,weight=3)
+            self.__frameInicio.grid_columnconfigure(0, weight=3)
 
             self.__titulo = CTkLabel(self.__frameInicio, text="Hestia", font=("Arial", 50))
 
-            self.__titulo.grid(row=1,column=0,padx=100,pady=20,columnspan=2)
+            self.__titulo.grid(row=1, column=0, padx=100, pady=20, columnspan=2)
 
             self.__informacionInicio = CTkLabel(self.__frameInicio, text="Organizar archivos", font=("Arial", 20))
 
-            self.__informacionInicio.grid(row=2,column=0,pady=20)
+            self.__informacionInicio.grid(row=2, column=0, pady=20)
 
-            self.__buttonInicioInformacion = CTkButton(self.__frameInicio, text="Información", font=("Arial", 12),command=lambda:self.__Manual("Inicio"))
+            self.__buttonInicioInformacion = CTkButton(self.__frameInicio, text="Información", font=("Arial", 12),
+                                                       command=lambda: self.__Manual("Inicio"))
 
-            self.__buttonInicioInformacion.grid(row=2,column=1,columnspan=2)
+            self.__buttonInicioInformacion.grid(row=2, column=1, columnspan=2)
 
-            self.__buttonInicio = CTkButton(self.__frameInicio, text="Aceptar", font=("Arial", 20))
+            self.__buttonInicio = CTkButton(self.__frameInicio, text="Aceptar", font=("Arial", 20),
+                                            command=lambda: self.__organizador.archivos())
 
-            self.__buttonInicio.grid(row=3,column=0,pady=20 ,padx=15,columnspan=2,sticky="ew")
+            self.__buttonInicio.grid(row=3, column=0, pady=20, padx=15, columnspan=2, sticky="ew")
 
-        elif (nombre == "Youtube"):
+        elif nombre == "Youtube":
 
-            self.__frameYoutube.grid(row=0,column=3,sticky="n",padx=50)
+            self.__frameYoutube.grid(row=0, column=3, sticky="n", padx=50)
 
-            self.__frameYoutube.grid_columnconfigure(0,weight=3)
-#-----------------------------------------------------------------------------------------------------------------------
+            self.__frameYoutube.grid_columnconfigure(0, weight=3)
+
+            # -----------------------------------------------------------------------------------------------------------------------
+
             self.__titulo = CTkLabel(self.__frameYoutube, text="Hestia", font=("Arial", 50))
 
-            self.__titulo.grid(row=0,column=0,padx=100,pady=20,columnspan=2)
-#-----------------------------------------------------------------------------------------------------------------------
-            self.__informacion = CTkLabel(self.__frameYoutube, text="Descargar videos o audios de youtube", font=("Arial", 15))
+            self.__titulo.grid(row=0, column=0, padx=100, pady=20, columnspan=2)
+
+            # -----------------------------------------------------------------------------------------------------------------------
+            self.__informacion = CTkLabel(self.__frameYoutube, text="Descargar videos o audios de youtube",
+                                          font=("Arial", 15))
 
             self.__informacion.grid(row=1, column=0)
-#-----------------------------------------------------------------------------------------------------------------------
+            # -----------------------------------------------------------------------------------------------------------------------
             self.__link = CTkLabel(self.__frameYoutube, text="Ingrear Link", font=("Arial", 15))
 
             self.__link.grid(row=2, column=0)
-#----------------------------------------------------------------------------------------------------------------------
+            # ----------------------------------------------------------------------------------------------------------------------
             self.__input = CTkEntry(self.__frameYoutube)
 
-            self.__input.grid(row=3, column=0,pady=20)
+            self.__input.grid(row=3, column=0, pady=20)
 
-            self.__ButonAlta = CTkButton(self.__frameYoutube,text="Alta calidad",)#command=lambda:self.__Youtube("Alta") )
+            self.__ButonAlta = CTkButton(self.__frameYoutube, text="Alta calidad", )  # command=lambda:self.__Youtube(
+            # "Alta"))
 
-            self.__ButonAlta.grid(row=4, column=0,pady=5)
+            self.__ButonAlta.grid(row=4, column=0, pady=5)
 
-            self.__ButonBaja = CTkButton(self.__frameYoutube,text="Baja calidad",)#command=lambda:self.__youtube("Baja"))
+            self.__ButonBaja = CTkButton(self.__frameYoutube, text="Baja calidad", )  # command=lambda:self.__youtube(
+            # "Baja"))
 
-            self.__ButonBaja.grid(row=5, column=0,pady=5)
+            self.__ButonBaja.grid(row=5, column=0, pady=5)
 
-            self.__ButonAudio = CTkButton(self.__frameYoutube,text="Audios",)#command=lambda:self.__youtube("Audios"))
+            self.__ButonAudio = CTkButton(self.__frameYoutube,
+                                          text="Audios", )  # command=lambda:self.__youtube("Audios"))
 
-            self.__ButonAudio.grid(row=6, column=0,pady=5)
+            self.__ButonAudio.grid(row=6, column=0, pady=5)
 
-#-----------------------------------------------------------------------------------------------------------------------
+        # -----------------------------------------------------------------------------------------------------------------------
 
-
-        '''elif(nombre == "Documentos"):
+        '''elif nombre == "Documentos":
 
             self.__vistaDocumento.pack()
 
@@ -131,7 +142,7 @@ class Vista:
 
             self.__botonWord.grid(row=2,column=0)
 
-        elif(nombre == "Imagenes"):
+        elif nombre == "Imagenes":
 
             self.__vistaImagen.pack()
 
@@ -151,24 +162,20 @@ class Vista:
 
             self.__botonJpg.grid(row=3,column=0)'''
 
-
     def iniciar_aplicacion(self):
         '''self.__mostrar_ventanas("Inicio")'''
         self.__ventana.mainloop()
 
-
-    #def __SubirDocumentos(self,documento):
+    # def __SubirDocumentos(self,documento):
     #    self.__subirDocumento = filedialog.askopenfilenames(title="Abrir")
     #    archivo = self.__subirDocumento
-
 
     #    if(documento=="pdf" or documento == "word" ):
     #        self.__Word_Pdf(documento,archivo)
     #    else:
     #        self.__Png_o_Jpg(documento,archivo)
 
-
-    def __Youtube(self,boton):
+    def __Youtube(self, boton):
 
         link = self.__input.get()
 
@@ -176,9 +183,9 @@ class Vista:
 
         mensaje = None
 
-        if(link != ""):
+        if (link != ""):
 
-            resultado =  self.__youtube.Descargar(link,boton)
+            resultado = self.__youtube.Descargar(link, boton)
 
             estado = resultado[0]
 
@@ -189,14 +196,13 @@ class Vista:
 
             mensaje = "El campo esta vacio"
 
-        self.__Notificacion(estado,mensaje)
+        self.__Notificacion(estado, mensaje)
 
         del estado
 
         del mensaje
 
-
-    #def __Png_o_Jpg(self,tipo,archivo):
+    # def __Png_o_Jpg(self,tipo,archivo):
 
     #    nombre= None
     #    if (archivo.endswith(".jpg") or archivo.endswith(".webp") or archivo.endswith("jpeg") or archivo.endswith(
@@ -226,7 +232,7 @@ class Vista:
 
     #            nombre = archivo.split(".svg")[0]
 
-    #def __Word_Pdf(self,archivo):
+    # def __Word_Pdf(self,archivo):
     #    nombre = None
     #    mensaje = None
     #    if archivo.endswith(".docx"):
@@ -238,7 +244,6 @@ class Vista:
 
     #        resultado = [1, "El documento ingresado no es un pdf o un docuemto de word"]
 
-
     #    resultado = self.__convertidoresDocumentos.pdf(nombre, archivo)
 
     #    estado = resultado[0]
@@ -247,9 +252,7 @@ class Vista:
 
     #    self.__Notificacion(estado, mensaje)
 
-
-
-    #def __Manual(self,tipo):
+    # def __Manual(self,tipo):
     #    ventanaEmergente = CTkToplevel(self.__ventana)
 
     #    ventanaEmergente.geometry("400x300")
@@ -271,15 +274,9 @@ class Vista:
     #    else:
     #        self.__ventanaEmergenteRaiz.focus()  # if window exists focus it
 
+    def __Notificacion(self, estado, mensaje):
 
-    def __Notificacion(self,estado,mensaje):
-
-        if(estado == 0):
-            messagebox.showinfo("Exito",mensaje)
+        if (estado == 0):
+            messagebox.showinfo("Exito", mensaje)
         else:
-            messagebox.showerror("Error",mensaje)
-
-
-
-
-
+            messagebox.showerror("Error", mensaje)
