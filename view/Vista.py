@@ -2,8 +2,8 @@ from tkinter import *
 from customtkinter import *
 from tkinter import messagebox
 from tkinter import filedialog
-# from controlador.controladorYotube import controladorYoutube
-# from controlador.controladorPdfWord import  controladorPdfWord
+from controlador.controladorYotube import controladorYoutube
+from controlador.controladorPdfWord import controladorPdfWord
 from controlador.controladorOrganizador import controladorOrganizador
 
 
@@ -15,7 +15,7 @@ class Vista:
 
         self.__ubicacion = ubicacion
 
-        # self.__youtube = controladorYoutube()
+        self.__youtube = controladorYoutube()
 
         # self.__convertidoresDocumentos = controladorPdfWord()
 
@@ -43,9 +43,21 @@ class Vista:
 
         self.__menuYoutube.grid(row=1, column=0, padx=10, pady=(10, 0), sticky="w")
 
+        self.__menuWord = CTkButton(self.__menu, text="Word", command=lambda: self.__mostrar_ventanas("Word"))
+
+        self.__menuWord.grid(row=3, column=0, padx=10, pady=(10, 0), sticky="w")
+
+        self.__menuPdf = CTkButton(self.__menu, text="PDF", command=lambda: self.__mostrar_ventanas("Pdf"))
+
+        self.__menuPdf.grid(row=4, column=0, padx=10, pady=(10, 0), sticky="w")
+
         self.__frameInicio = CTkFrame(self.__ventana, width=200, height=200)
 
-        self.__frameYoutube = CTkFrame(self.__ventana)
+        self.__frameYoutube = CTkFrame(self.__ventana, width=200, height=200)
+
+        self.__frameWord = CTkFrame(self.__ventana, width=200, height=200)
+
+        self.__framePdf = CTkFrame(self.__ventana, width=200, height=200)
 
         self.__mostrar_ventanas("Inicio")
 
@@ -54,6 +66,8 @@ class Vista:
     def __ocultar_ventanas(self):
         self.__frameInicio.grid_forget()
         self.__frameYoutube.grid_forget()
+        self.__frameWord.grid_forget()
+        self.__framePdf.grid_forget()
 
     def __mostrar_ventanas(self, nombre):
 
@@ -84,7 +98,6 @@ class Vista:
             self.__buttonInicio.grid(row=3, column=0, pady=20, padx=15, columnspan=2, sticky="ew")
 
         elif nombre == "Youtube":
-
             self.__frameYoutube.grid(row=0, column=3, sticky="n", padx=50)
 
             self.__frameYoutube.grid_columnconfigure(0, weight=3)
@@ -96,53 +109,75 @@ class Vista:
             self.__titulo.grid(row=0, column=0, padx=100, pady=20, columnspan=2)
 
             # -----------------------------------------------------------------------------------------------------------------------
-            self.__informacion = CTkLabel(self.__frameYoutube, text="Descargar videos o audios de youtube",
-                                          font=("Arial", 15))
+            self.__informacionYoutube = CTkLabel(self.__frameYoutube, text="Descargar videos o audios de youtube",
+                                                 font=("Arial", 15))
 
-            self.__informacion.grid(row=1, column=0)
+            self.__informacionYoutube.grid(row=1, column=0)
             # -----------------------------------------------------------------------------------------------------------------------
             self.__link = CTkLabel(self.__frameYoutube, text="Ingrear Link", font=("Arial", 15))
 
             self.__link.grid(row=2, column=0)
             # ----------------------------------------------------------------------------------------------------------------------
-            self.__input = CTkEntry(self.__frameYoutube)
+            self.__inputYoutube = CTkEntry(self.__frameYoutube, width=250)
 
-            self.__input.grid(row=3, column=0, pady=20)
+            self.__inputYoutube.grid(row=3, column=0, pady=20)
 
-            self.__ButonAlta = CTkButton(self.__frameYoutube, text="Alta calidad", )  # command=lambda:self.__Youtube(
-            # "Alta"))
+            self.__ButonAlta = CTkButton(self.__frameYoutube, text="Alta calidad",
+                                         command=lambda: self.__youtube.Descargar(self.__inputYoutube.get(), "Alta"
+                                                                                  , self.__ubicacion))
 
             self.__ButonAlta.grid(row=4, column=0, pady=5)
 
-            self.__ButonBaja = CTkButton(self.__frameYoutube, text="Baja calidad", )  # command=lambda:self.__youtube(
-            # "Baja"))
+            self.__ButonBaja = CTkButton(self.__frameYoutube, text="Baja calidad",
+                                         command=lambda: self.__youtube.Descargar(self.__inputYoutube.get(), "Baja"
+                                                                                  , self.__ubicacion))
 
             self.__ButonBaja.grid(row=5, column=0, pady=5)
 
-            self.__ButonAudio = CTkButton(self.__frameYoutube,
-                                          text="Audios", )  # command=lambda:self.__youtube("Audios"))
+            self.__ButonAudio = CTkButton(self.__frameYoutube, text="Audios",
+                                          command=lambda: self.__youtube.Descargar(self.__inputYoutube.get(), "Baja"
+                                                                                   , self.__ubicacion))
 
             self.__ButonAudio.grid(row=6, column=0, pady=5)
 
+
         # -----------------------------------------------------------------------------------------------------------------------
 
-        '''elif nombre == "Documentos":
+        elif nombre == "Word":
 
-            self.__vistaDocumento.pack()
+            self.__frameWord.grid(row=0, column=3, sticky="n", padx=50)
 
-            self.__titulo = Label(self.__vistaDocumento, text="Hestia", font=("Arial", 50))
+            self.__titulo = CTkLabel(self.__frameWord, text="Hestia", font=("Arial", 50))
 
-            self.__titulo.grid(row=0, column=0)
+            self.__titulo.grid(row=0, column=0, padx=100, pady=20, )
 
-            self.__informacion = Label(self.__vistaDocumento, text="Convertir Documentos", font=("Arial", 15))
+            self.__informacionWord = CTkLabel(self.__frameWord, text="Convertir Documentos a pdf", font=("Arial", 15))
 
-            self.__informacion.grid(row=1, column=0)
+            self.__informacionWord.grid(row=1, column=0, pady=5)
 
-            self.__botonWord = Button(self.__vistaDocumento, text="Convertir a word", command=lambda:self.__SubirDocumentos("word"), font=("Arial",12))
+            self.__botonWord = CTkButton(self.__frameWord,
+                                         text="Convertir a pdf", )  # command=lambda:self.__SubirDocumentos("word"), font=("Arial",12))
 
-            self.__botonWord.grid(row=2,column=0)
+            self.__botonWord.grid(row=2, column=0, pady=10)
 
-        elif nombre == "Imagenes":
+        elif nombre == "Pdf":
+
+            self.__framePdf.grid(row=0, column=3, sticky="n", padx=50)
+
+            self.__titulo = CTkLabel(self.__framePdf, text="Hestia", font=("Arial", 50))
+
+            self.__titulo.grid(row=0, column=0, padx=100, pady=20, )
+
+            self.__informacionPdf = CTkLabel(self.__framePdf, text="Convertir Documentos a Word", font=("Arial", 15))
+
+            self.__informacionPdf.grid(row=1, column=0, pady=5)
+
+            self.__botonPdf = CTkButton(self.__framePdf,
+                                        text="Convertir a Word", )  # command=lambda:self.__SubirDocumentos("word"), font=("Arial",12))
+
+            self.__botonPdf.grid(row=2, column=0, pady=10)
+
+        '''elif nombre == "Imagenes":
 
             self.__vistaImagen.pack()
 
@@ -174,33 +209,6 @@ class Vista:
     #        self.__Word_Pdf(documento,archivo)
     #    else:
     #        self.__Png_o_Jpg(documento,archivo)
-
-    def __Youtube(self, boton):
-
-        link = self.__input.get()
-
-        estado = None
-
-        mensaje = None
-
-        if (link != ""):
-
-            resultado = self.__youtube.Descargar(link, boton)
-
-            estado = resultado[0]
-
-            mensaje = resultado[1]
-        else:
-
-            estado = 1
-
-            mensaje = "El campo esta vacio"
-
-        self.__Notificacion(estado, mensaje)
-
-        del estado
-
-        del mensaje
 
     # def __Png_o_Jpg(self,tipo,archivo):
 
