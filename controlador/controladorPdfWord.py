@@ -2,28 +2,30 @@ from pdf2docx import parse
 
 from docx2pdf  import convert
 
-class PdfWord():
+class controladorPdfWord():
 
     def __init__(self):
 
         pass
 
 
-    def pdf(self,nombre,archivo):
+    def pdf(self,archivos):
         try:
-            archivoPdf = nombre + ".pdf"
-            print(archivoPdf)
-            print(archivo)
-            convert("C:/Users/juane/Downloads/Cartadepresentacion.docx", "C:/Users/juane/Downloads/Cartadepresentacion.pdf")
+            #archivoPdf = nombre + ".pdf"
+            #print(archivoPdf)
+            #print(archivos)
+            #convert("C:/Users/juane/Downloads/Cartadepresentacion.docx", "C:/Users/juane/Downloads/Cartadepresentacion.pdf")
 
-            return [0,"El pdf creado"]
+            #return [0,"El pdf creado"]
+            pass
         except Exception as e:
             print(f"Hubo un error al convertir el pdf: {str(e)}")
             return  [1,f"Hubo un error al convertir el pdf: {str(e)}"]
 
         finally:
 
-            del archivoPdf
+            #del archivoPdf
+            pass
 
     def word(self,nombre,archivo):
         try:
