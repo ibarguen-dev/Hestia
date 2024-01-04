@@ -17,7 +17,8 @@ class Vista:
 
         self.__youtube = controladorYoutube()
 
-        # self.__convertidoresDocumentos = controladorPdfWord()
+        self.__controladorPdfWord = controladorPdfWord()
+
 
         self.__organizador = controladorOrganizador(self.__ubicacion)
 
@@ -156,9 +157,16 @@ class Vista:
             self.__informacionWord.grid(row=1, column=0, pady=5)
 
             self.__botonWord = CTkButton(self.__frameWord,
-                                         text="Convertir a pdf", )  # command=lambda:self.__SubirDocumentos("word"), font=("Arial",12))
+                                         text="Subir archivos",
+                                         command=lambda:self.__SubirDocumentos(), font=("Arial",12))
 
             self.__botonWord.grid(row=2, column=0, pady=10)
+
+            self.__botonWordConvertidor = CTkButton(self.__frameWord,
+                                         text="Convertir Archivos",
+                                         command=lambda:self.__SubirDocumentos(), font=("Arial",12))
+
+            self.__botonWordConvertidor.grid(row=3, column=0, pady=10)
 
         elif nombre == "Pdf":
 
@@ -201,14 +209,13 @@ class Vista:
         '''self.__mostrar_ventanas("Inicio")'''
         self.__ventana.mainloop()
 
-    # def __SubirDocumentos(self,documento):
-    #    self.__subirDocumento = filedialog.askopenfilenames(title="Abrir")
-    #    archivo = self.__subirDocumento
+    def __SubirDocumentos(self):
 
-    #    if(documento=="pdf" or documento == "word" ):
-    #        self.__Word_Pdf(documento,archivo)
-    #    else:
-    #        self.__Png_o_Jpg(documento,archivo)
+        self.__subirDocumento = filedialog.askopenfilenames(title="Seleccionar archivos",
+                                                                filetypes=[("Archivos de texto", "*.txt")])
+
+        archivo = self.__subirDocumento
+
 
     # def __Png_o_Jpg(self,tipo,archivo):
 
