@@ -1,45 +1,50 @@
-from os import chdir,remove,getlogin,system
+from os import chdir
 from pytube import YouTube
-
-
-class youtubeController():
+from Modelo.modeloYoutube import modeloYoutube
+from view.vistaAlerta import vistaAlerta
+class controladorYoutube():
 
     def __init__(self):
 
         self.__youtube = None
+        self.__modeloYoutube = modeloYoutube()
+        self.__aletas = vistaAlerta()
 
-    def Descargar(self,link,boton):
+    def Descargar(self,link,boton,ubicacion):
         try:
 
-            chdir("C:/Users/" + getlogin() + "/Downloads/Imagenes y Videos/Videos")
+            chdir(ubicacion + "/Imagenes y Videos/Videos")
+            respuesta = self.__modeloYoutube.validarUrl(link)
+            if respuesta:
 
-            self.__youtube = YouTube(link)
+                self.__youtube = YouTube(link)
 
-            if(boton == "Alta"):
+                if(boton == "Alta"):
 
-                self.__youtube.streams.get_highest_resolution().download()
+                    self.__youtube.streams.get_highest_resolution().download()
 
-                return [0,"Descarga completa"]
+                    self.__aletas.informacion("Descarga completa")
 
-            elif( boton == "Baja"):
+                elif( boton == "Baja"):
 
-                self.__youtube.streams.get_lowest_resolution().download()
+                    self.__youtube.streams.get_lowest_resolution().download()
 
-                return [0,"Descarga completa"]
+                    self.__aletas.informacion("Descarga completa")
 
-            else:
+                else:
 
-                titulo = self.__youtube.title
+                    titulo = self.__youtube.title
 
-                audio_stream = self.__youtube.streams.filter(only_audio=True).first()
+                    audio_stream = self.__youtube.streams.filter(only_audio=True).first()
 
-                audio_stream.download(filename=titulo + ".mp3")
+                    audio_stream.download(filename=titulo + ".mp3")
 
-                return [1,"Descarga completa"]
+                    self.__aletas.informacion("Descarga completa")
 
         except Exception:
 
-            return("Hubo un error al mento de hacer las descarga" + Exception)
+            self.__aletas.error("Hubo un error al mento de hacer las descarga" + Exception)
 
         finally:
+
             pass
