@@ -19,6 +19,9 @@ class Vista:
 
         self.__controladorPdfWord = controladorPdfWord()
 
+        self.__activadorWord = "disable"
+
+        self.__activadorPdf = "disabled"
 
         self.__organizador = controladorOrganizador(self.__ubicacion)
 
@@ -164,7 +167,9 @@ class Vista:
 
             self.__botonWordConvertidor = CTkButton(self.__frameWord,
                                          text="Convertir Archivos",
-                                         command=lambda:self.__SubirDocumentos(), font=("Arial",12))
+                                        font=("Arial",12),)
+
+            self.__botonWordConvertidor.configure(state = self.__activadorWord)
 
             self.__botonWordConvertidor.grid(row=3, column=0, pady=10)
 
@@ -214,6 +219,10 @@ class Vista:
         self.__subirDocumento = filedialog.askopenfilenames(title="Seleccionar archivos",
                                                                 filetypes=[("Archivos de texto", "*.txt")])
 
+        if self.__subirDocumento != "":
+            print(self.__subirDocumento)
+            self.__activadorWord = "normal"
+            self.__botonWordConvertidor.configure(state=self.__activadorWord)
         archivo = self.__subirDocumento
 
 
