@@ -11,6 +11,8 @@ class Vista:
 
     def __init__(self, color, ubicacion):
 
+
+
         self.__color = color
 
         self.__ubicacion = ubicacion
@@ -19,6 +21,9 @@ class Vista:
 
         self.__controladorPdfWord = controladorPdfWord()
 
+        self.__archivosPdf = None
+
+        self.__archivosWord = None
 
         self.__organizador = controladorOrganizador(self.__ubicacion)
 
@@ -158,15 +163,15 @@ class Vista:
 
             self.__botonWord = CTkButton(self.__frameWord,
                                          text="Subir archivos",
-                                         command=lambda:self.__SubirDocumentos(), font=("Arial",12))
+                                         command=lambda: self.__SubirDocumentosWord(), font=("Arial", 12))
 
             self.__botonWord.grid(row=2, column=0, pady=10)
 
             self.__botonWordConvertidor = CTkButton(self.__frameWord,
-                                         text="Convertir Archivos",
-                                         command=lambda:self.__SubirDocumentos(), font=("Arial",12))
+                                                    text="Convertir pdf",
+                                                    command=lambda:self.__controladorPdfWord.pdf(self.__archivosWord))
 
-            self.__botonWordConvertidor.grid(row=3, column=0, pady=10)
+
 
         elif nombre == "Pdf":
 
@@ -181,9 +186,13 @@ class Vista:
             self.__informacionPdf.grid(row=1, column=0, pady=5)
 
             self.__botonPdf = CTkButton(self.__framePdf,
-                                        text="Convertir a Word", )  # command=lambda:self.__SubirDocumentos("word"), font=("Arial",12))
+                                        text="Subir archivos", )
 
-            self.__botonPdf.grid(row=2, column=0, pady=10)
+            self.__botonPdfConvertidor = CTkButton(self.__framePdf,
+                                        text="Convertir a Word",
+                                        command=lambda:self.__controladorPdfWord.word(self.__archivosPdf))
+
+
 
         '''elif nombre == "Imagenes":
 
@@ -209,12 +218,27 @@ class Vista:
         '''self.__mostrar_ventanas("Inicio")'''
         self.__ventana.mainloop()
 
-    def __SubirDocumentos(self):
+    def __SubirDocumentosWord(self):
 
         self.__subirDocumento = filedialog.askopenfilenames(title="Seleccionar archivos",
-                                                                filetypes=[("Archivos de texto", "*.txt")])
+                                                            filetypes=[("Archivos de word", "*.docx")])
 
-        archivo = self.__subirDocumento
+        if self.__subirDocumento != "":
+
+            self.__botonPdfConvertidor.grid(row=3, column=0, pady=10)
+
+            self.__archivosPdf = self.__subirDocumento
+
+    def __SubirDocumentosPdf(self):
+
+        self.__subirDocumento = filedialog.askopenfilenames(title="Seleccionar archivos",
+                                                            filetypes=[("Archivos de pdf", "*.pdf")])
+
+        if self.__subirDocumento != "":
+
+            self.__botonPdf.grid(row=2, column=0, pady=10)
+
+            self.__archivosWord = self.__subirDocumento
 
 
     # def __Png_o_Jpg(self,tipo,archivo):

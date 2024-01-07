@@ -1,2 +1,5 @@
 pip install pytube
 pip install pillow
+pip install pdf2docx
+pip install docx2pdf
+pip install customtkinter
