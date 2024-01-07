@@ -9,7 +9,6 @@ class ViewYoutube():
 
     
 
-        
 
         while True:
 
@@ -107,7 +106,7 @@ class ViewYoutube():
                                 if nombre != "":
 
                                     video = YouTube(url)
-
+                                    
                                     audio_stream = video.streams.filter(only_audio=True).first()
 
                                     audio_stream.download(filename= nombre+".mp3")

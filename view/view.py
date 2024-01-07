@@ -47,3 +47,5 @@ class view():
 
     def organaizarArchivos(self):
         self.assetsorganizador.files()
+
+

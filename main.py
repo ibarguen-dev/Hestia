@@ -1,35 +1,25 @@
-from view.view import view
+from view.Vista import Vista
+
+from controlador.controladorConfiguraciones import Configuraciones
+
 try:
-    while True:
 
-        menus = view()
-        
-        respusta = input("Por favor ingrese una opción de la lista: ")
+    configuracionObjecto = Configuraciones()
 
-        match respusta:
+    resultadoBaseDatos = configuracionObjecto.datosBaseDatos()
 
-            case "1":
+    if resultadoBaseDatos[0] == 0:
 
-                menus.convertidores()
+        diccionarioDatos = resultadoBaseDatos[1].copy()
 
-            case "2":
+        vista = Vista(diccionarioDatos["color"], diccionarioDatos["ubicacion"])
 
-                menus.youtube()
+        vista.iniciar_aplicacion()
 
-            case "3":
+    else:
 
-               menus.organaizarArchivos() 
-
-            case "4":
-
-                break
-            
-            case _:
-
-                print("Error la opción ingresada no existe")
+        print("error")
 
 except Exception as e:
 
-    input(e)
-
-    #Hacaer 
+    print(e)

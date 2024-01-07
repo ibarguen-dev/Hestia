@@ -13,7 +13,7 @@ from docx2pdf  import convert
 from PIL import Image
 
 
-class convertidoresConfig():
+'''class convertidoresConfig():
 
     def __init__ (self):
         self.filesvalidations
@@ -208,5 +208,5 @@ class convertidoresConfig():
 
             except Exception as e:
 
-                print(e)
+                print(e)'''
 
