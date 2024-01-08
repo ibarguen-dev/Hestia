@@ -57,6 +57,14 @@ class Vista:
 
         self.__menuPdf.grid(row=4, column=0, padx=10, pady=(10, 0), sticky="w")
 
+        self.__menuJpg = CTkButton(self.__menu, text="JPG",command=lambda: self.__mostrar_ventanas("Jpg"))
+
+        self.__menuJpg.grid(row=5, column=0, padx=10, pady=(10, 0), sticky="w")
+
+        self.__menuPng = CTkButton(self.__menu,text="PNG",command=lambda:self.__mostrar_ventanas("Png"))
+
+        self.__menuPng.grid(row=6,column=0,padx=10,pady=(10,0),sticky="w")
+
         self.__frameInicio = CTkFrame(self.__ventana, width=200, height=200)
 
         self.__frameYoutube = CTkFrame(self.__ventana, width=200, height=200)
@@ -64,6 +72,10 @@ class Vista:
         self.__frameWord = CTkFrame(self.__ventana, width=200, height=200)
 
         self.__framePdf = CTkFrame(self.__ventana, width=200, height=200)
+
+        self.__framePng = CTkFrame(self.__ventana,width=200,height=200)
+
+        self.__frameJpg = CTkFrame(self.__ventana,width=200,height=200)
 
         self.__mostrar_ventanas("Inicio")
 
@@ -74,7 +86,8 @@ class Vista:
         self.__frameYoutube.grid_forget()
         self.__frameWord.grid_forget()
         self.__framePdf.grid_forget()
-
+        self.__frameJpg.grid_forget()
+        self.__framePng.grid_forget()
     def __mostrar_ventanas(self, nombre):
 
         self.__ocultar_ventanas()
@@ -104,6 +117,7 @@ class Vista:
             self.__buttonInicio.grid(row=3, column=0, pady=20, padx=15, columnspan=2, sticky="ew")
 
         elif nombre == "Youtube":
+
             self.__frameYoutube.grid(row=0, column=3, sticky="n", padx=50)
 
             self.__frameYoutube.grid_columnconfigure(0, weight=3)
@@ -163,7 +177,7 @@ class Vista:
 
             self.__botonWord = CTkButton(self.__frameWord,
                                          text="Subir archivos",
-                                         command=lambda: self.__SubirDocumentosWord(), font=("Arial", 12))
+                                         command=lambda: self.__subirDocumentosWord(), font=("Arial", 12))
 
             self.__botonWord.grid(row=2, column=0, pady=10)
 
@@ -186,7 +200,10 @@ class Vista:
             self.__informacionPdf.grid(row=1, column=0, pady=5)
 
             self.__botonPdf = CTkButton(self.__framePdf,
-                                        text="Subir archivos", )
+                                        text="Subir archivos",
+                                        command=lambda:self.__subirDocumentosPdf())
+
+            self.__botonPdf.grid(row=2,column=0,pady=5)
 
             self.__botonPdfConvertidor = CTkButton(self.__framePdf,
                                         text="Convertir a Word",
@@ -194,31 +211,55 @@ class Vista:
 
 
 
-        '''elif nombre == "Imagenes":
+        elif nombre == "Png":
 
-            self.__vistaImagen.pack()
+            self.__framePng.grid(row=0, column=3, sticky="n", padx=50)
 
-            self.__titulo = Label(self.__vistaImagen, text="Hestia", font=("Arial", 50))
+            self.__titulo = CTkLabel(self.__framePng, text="Hestia", font=("Arial", 50))
 
-            self.__titulo.grid(row=0, column=0)
+            self.__titulo.grid(row=0, column=0, padx=100, pady=20, )
 
-            self.__informacion = Label(self.__vistaImagen, text="Convertir Imagenes", font=("Arial", 15))
+            self.__informacionPdf = CTkLabel(self.__framePng, text="Convertir Imagenes a Png", font=("Arial", 15))
 
-            self.__informacion.grid(row=1, column=0)
+            self.__informacionPdf.grid(row=1, column=0, pady=5)
 
-            self.__botonPng = Button(self.__vistaImagen, text="Convertir a Png",font=("Arial",12))
+            self.__botonPdf = CTkButton(self.__framePng,
+                                        text="Subir imagenes",
+                                        command=lambda: self.__subirImagenesPng())
 
-            self.__botonPng.grid(row=2,column=0)
+            self.__botonPdf.grid(row=2, column=0, pady=5)
 
-            self.__botonJpg =Button(self.__vistaImagen,text="Convertir a jpg",font=("Arial,12"))
+            self.__botonPdfConvertidor = CTkButton(self.__framePng,
+                                                   text="Convertir a png",
+                                                   command=lambda: self.__controladorPdfWord.word(self.__archivosPdf))
 
-            self.__botonJpg.grid(row=3,column=0)'''
+        elif nombre == "Jpg":
+
+            self.__frameJpg.grid(row=0, column=3, sticky="n", padx=50)
+
+            self.__titulo = CTkLabel(self.__frameJpg, text="Hestia", font=("Arial", 50))
+
+            self.__titulo.grid(row=0, column=0, padx=100, pady=20, )
+
+            self.__informacionPdf = CTkLabel(self.__frameJpg, text="Convertir Imagenes a Jpg", font=("Arial", 15))
+
+            self.__informacionPdf.grid(row=1, column=0, pady=5)
+
+            self.__botonPdf = CTkButton(self.__frameJpg,
+                                        text="Subir imagenes",
+                                        command=lambda: self.__subirImagenesJpg())
+
+            self.__botonPdf.grid(row=2, column=0, pady=5)
+
+            self.__botonPdfConvertidor = CTkButton(self.__frameJpg,
+                                                   text="Convertir a jpg",
+                                                   command=lambda: self.__controladorPdfWord.word(self.__archivosPdf))
+
 
     def iniciar_aplicacion(self):
-        '''self.__mostrar_ventanas("Inicio")'''
         self.__ventana.mainloop()
 
-    def __SubirDocumentosWord(self):
+    def __subirDocumentosWord(self):
 
         self.__subirDocumento = filedialog.askopenfilenames(title="Seleccionar archivos",
                                                             filetypes=[("Archivos de word", "*.docx")])
@@ -227,95 +268,22 @@ class Vista:
 
             self.__botonPdfConvertidor.grid(row=3, column=0, pady=10)
 
-            self.__archivosPdf = self.__subirDocumento
+            self.__archivosWord = self.__subirDocumento
 
-    def __SubirDocumentosPdf(self):
+    def __subirDocumentosPdf(self):
 
         self.__subirDocumento = filedialog.askopenfilenames(title="Seleccionar archivos",
                                                             filetypes=[("Archivos de pdf", "*.pdf")])
-
+        print(self.__subirDocumento)
         if self.__subirDocumento != "":
 
-            self.__botonPdf.grid(row=2, column=0, pady=10)
+            self.__botonPdfConvertidor.grid(row=3, column=0, pady=10)
 
-            self.__archivosWord = self.__subirDocumento
+            self.__archivosPdf = self.__subirDocumento
 
 
-    # def __Png_o_Jpg(self,tipo,archivo):
+    def __subirImagenesPng(self):
+        pass
 
-    #    nombre= None
-    #    if (archivo.endswith(".jpg") or archivo.endswith(".webp") or archivo.endswith("jpeg") or archivo.endswith(
-    #       ".gif") or archivo.endswith(".tiff") or archivo.endswith(".svg")):
-
-    #        if archivo.endswith(".jpg"):
-
-    #            nombre = archivo.split(".jpg")[0]
-
-    #        elif archivo.endswith(".jpeg"):
-
-    #            nombre = archivo.split(".jpeg")[0]
-
-    #        elif archivo.endswith(".webp"):
-
-    #            nombre = archivo.split(".webp")[0]
-
-    #        elif archivo.endswith(".gif"):
-
-    #            nombre = archivo.split(".gif")[0]
-
-    #        elif archivo.endswith(".tiff"):
-
-    #            nombre = archivo.split(".tiff")[0]
-
-    #        elif archivo.endswith(".svg"):
-
-    #            nombre = archivo.split(".svg")[0]
-
-    # def __Word_Pdf(self,archivo):
-    #    nombre = None
-    #    mensaje = None
-    #    if archivo.endswith(".docx"):
-    #        nombre = archivo.split(".docx")[0]
-
-    #    elif archivo.endswith(".pdf"):
-    #        nombre = archivo.split(".pdf")[0]
-    #    else:
-
-    #        resultado = [1, "El documento ingresado no es un pdf o un docuemto de word"]
-
-    #    resultado = self.__convertidoresDocumentos.pdf(nombre, archivo)
-
-    #    estado = resultado[0]
-
-    #    mensaje = resultado[1]
-
-    #    self.__Notificacion(estado, mensaje)
-
-    # def __Manual(self,tipo):
-    #    ventanaEmergente = CTkToplevel(self.__ventana)
-
-    #    ventanaEmergente.geometry("400x300")
-
-    #    manual = None
-
-    #    if(tipo == "Inicio"):
-    #        manual = CTkLabel(ventanaEmergente,text="Hola mundo")
-    #        manual.pack()
-    #    elif(tipo):
-    #        pass
-    #    elif(tipo):
-    #        pass
-    #    elif(tipo):
-    #        pass
-
-    #    if self.__ventanaEmergenteRaiz is None or not self.__ventanaEmergenteRaiz.winfo_exists():
-    #        self.__ventanaEmergenteRaiz = ventanaEmergente  # create window if its None or destroyed
-    #    else:
-    #        self.__ventanaEmergenteRaiz.focus()  # if window exists focus it
-
-    def __Notificacion(self, estado, mensaje):
-
-        if (estado == 0):
-            messagebox.showinfo("Exito", mensaje)
-        else:
-            messagebox.showerror("Error", mensaje)
+    def __subirImagenesJpg(self):
+        pass
