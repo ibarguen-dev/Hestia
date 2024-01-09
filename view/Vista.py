@@ -5,13 +5,11 @@ from tkinter import filedialog
 from controlador.controladorYotube import controladorYoutube
 from controlador.controladorPdfWord import controladorPdfWord
 from controlador.controladorOrganizador import controladorOrganizador
-
+from controlador.controladorImagen import controladorImagen
 
 class Vista:
 
     def __init__(self, color, ubicacion):
-
-
 
         self.__color = color
 
@@ -21,9 +19,15 @@ class Vista:
 
         self.__controladorPdfWord = controladorPdfWord()
 
+        self.__controladorImagen = controladorImagen()
+
         self.__archivosPdf = None
 
         self.__archivosWord = None
+
+        self.__archivosPng = None
+
+        self.__archivosJpg = None
 
         self.__organizador = controladorOrganizador(self.__ubicacion)
 
@@ -34,6 +38,7 @@ class Vista:
         self.__ventana.title("Hestia")
 
         self.__ventana.geometry("700x550")
+
 
         self.__ventana.grid_rowconfigure(0, weight=1)
 
@@ -88,6 +93,7 @@ class Vista:
         self.__framePdf.grid_forget()
         self.__frameJpg.grid_forget()
         self.__framePng.grid_forget()
+
     def __mostrar_ventanas(self, nombre):
 
         self.__ocultar_ventanas()
@@ -107,7 +113,7 @@ class Vista:
             self.__informacionInicio.grid(row=2, column=0, pady=20)
 
             self.__buttonInicioInformacion = CTkButton(self.__frameInicio, text="Información", font=("Arial", 12),
-                                                       command=lambda: self.__Manual("Inicio"))
+                                                       command=lambda: print())
 
             self.__buttonInicioInformacion.grid(row=2, column=1, columnspan=2)
 
@@ -155,13 +161,10 @@ class Vista:
             self.__ButonBaja.grid(row=5, column=0, pady=5)
 
             self.__ButonAudio = CTkButton(self.__frameYoutube, text="Audios",
-                                          command=lambda: self.__youtube.Descargar(self.__inputYoutube.get(), "Baja"
+                                          command=lambda: self.__youtube.Descargar(self.__inputYoutube.get(), "Audio"
                                                                                    , self.__ubicacion))
 
             self.__ButonAudio.grid(row=6, column=0, pady=5)
-
-
-        # -----------------------------------------------------------------------------------------------------------------------
 
         elif nombre == "Word":
 
@@ -185,8 +188,6 @@ class Vista:
                                                     text="Convertir pdf",
                                                     command=lambda:self.__controladorPdfWord.pdf(self.__archivosWord))
 
-
-
         elif nombre == "Pdf":
 
             self.__framePdf.grid(row=0, column=3, sticky="n", padx=50)
@@ -209,8 +210,6 @@ class Vista:
                                         text="Convertir a Word",
                                         command=lambda:self.__controladorPdfWord.word(self.__archivosPdf))
 
-
-
         elif nombre == "Png":
 
             self.__framePng.grid(row=0, column=3, sticky="n", padx=50)
@@ -219,19 +218,19 @@ class Vista:
 
             self.__titulo.grid(row=0, column=0, padx=100, pady=20, )
 
-            self.__informacionPdf = CTkLabel(self.__framePng, text="Convertir Imagenes a Png", font=("Arial", 15))
+            self.__informacionPng = CTkLabel(self.__framePng, text="Convertir Imagenes a Png", font=("Arial", 15))
 
-            self.__informacionPdf.grid(row=1, column=0, pady=5)
+            self.__informacionPng.grid(row=1, column=0, pady=5)
 
-            self.__botonPdf = CTkButton(self.__framePng,
+            self.__botonPng = CTkButton(self.__framePng,
                                         text="Subir imagenes",
                                         command=lambda: self.__subirImagenesPng())
 
-            self.__botonPdf.grid(row=2, column=0, pady=5)
+            self.__botonPng.grid(row=2, column=0, pady=5)
 
-            self.__botonPdfConvertidor = CTkButton(self.__framePng,
+            self.__botonPngConvertidor = CTkButton(self.__framePng,
                                                    text="Convertir a png",
-                                                   command=lambda: self.__controladorPdfWord.word(self.__archivosPdf))
+                                                   command=lambda:self.__controladorImagen.png(self.__archivosPng))
 
         elif nombre == "Jpg":
 
@@ -241,19 +240,19 @@ class Vista:
 
             self.__titulo.grid(row=0, column=0, padx=100, pady=20, )
 
-            self.__informacionPdf = CTkLabel(self.__frameJpg, text="Convertir Imagenes a Jpg", font=("Arial", 15))
+            self.__informacionJpg = CTkLabel(self.__frameJpg, text="Convertir Imagenes a Jpg", font=("Arial", 15))
 
-            self.__informacionPdf.grid(row=1, column=0, pady=5)
+            self.__informacionJpg.grid(row=1, column=0, pady=5)
 
-            self.__botonPdf = CTkButton(self.__frameJpg,
+            self.__botonJpg = CTkButton(self.__frameJpg,
                                         text="Subir imagenes",
                                         command=lambda: self.__subirImagenesJpg())
 
-            self.__botonPdf.grid(row=2, column=0, pady=5)
+            self.__botonJpg.grid(row=2, column=0, pady=5)
 
-            self.__botonPdfConvertidor = CTkButton(self.__frameJpg,
+            self.__botonJpgConvertidor = CTkButton(self.__frameJpg,
                                                    text="Convertir a jpg",
-                                                   command=lambda: self.__controladorPdfWord.word(self.__archivosPdf))
+                                                   command=lambda: self.__controladorImagen.jpg(self.__archivosJpg))
 
 
     def iniciar_aplicacion(self):
@@ -283,7 +282,40 @@ class Vista:
 
 
     def __subirImagenesPng(self):
-        pass
+
+        self.__archivosPng = None
+
+        self.__subirImagenes = filedialog.askopenfilenames(title="Seleccionar imagenes",
+
+                                                            filetypes=(
+                                                            [
+                                                                ("Imagenes", "*.jpeg"),
+                                                                ("Imagenes", "*.jpg"),
+                                                                ("Imagenes", "*.svg")
+                                                            ]))
+        print(self.__subirImagenes)
+
+        if self.__subirImagenes != "":
+
+            self.__botonPngConvertidor.grid(row=3, column=0, pady=10)
+
+            self.__archivosPng = self.__subirImagenes
 
     def __subirImagenesJpg(self):
-        pass
+        self.__archivosJpg = None
+
+        self.__subirImagenes = filedialog.askopenfilenames(title="Seleccionar imagenes",
+
+                                                            filetypes=(
+                                                                [
+                                                                    ("Imagenes", "*.jpeg"),
+                                                                    ("Imagenes", "*.png"),
+                                                                    ("Imagenes", "*.svg")
+                                                                ]))
+        print(self.__subirImagenes)
+
+        if self.__subirImagenes != "":
+
+            self.__botonJpgConvertidor.grid(row=3, column=0, pady=10)
+
+            self.__archivosJpg = self.__subirImagenes
