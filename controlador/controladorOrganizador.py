@@ -53,7 +53,7 @@ class controladorOrganizador():
             self.__alertas.error(e)
 
 
-    def archivos(self,):
+    def archivos(self):
         try:
             chdir(self.__direccion)
 
