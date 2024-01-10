@@ -8,7 +8,7 @@ class controladorYoutube():
 
         self.__youtube = None
         self.__modeloYoutube = modeloYoutube()
-        self.__aletas = vistaAlerta()
+        self.__alertas = vistaAlerta()
 
     def Descargar(self,link,boton,ubicacion):
         try:
@@ -23,13 +23,13 @@ class controladorYoutube():
 
                     self.__youtube.streams.get_highest_resolution().download()
 
-                    self.__aletas.informacion("Descarga completa")
+                    self.__alertas.informacion("Descarga completa")
 
                 elif( boton == "Baja"):
 
                     self.__youtube.streams.get_lowest_resolution().download()
 
-                    self.__aletas.informacion("Descarga completa")
+                    self.__alertas.informacion("Descarga completa")
 
                 else:
 
@@ -39,11 +39,11 @@ class controladorYoutube():
 
                     audio_stream.download(filename=titulo + ".mp3")
 
-                    self.__aletas.informacion("Descarga completa")
+                    self.__alertas.informacion("Descarga completa")
 
-        except Exception:
+        except Exception as e:
 
-            self.__aletas.error("Hubo un error al mento de hacer las descarga" + Exception)
+            self.__alertas.error("Hubo un error al mento de hacer las descarga" + e)
 
         finally:
 
