@@ -16,7 +16,7 @@ class BaseDatos():
                 color text,
                 ubicacion text)
             """)
-            return  [0,"La base de datos fue creada"]
+            return 0
         except self.baseDatos.OperationalError as e:
             print(e)
             return [1,"Hubo un error al momento de crear la base de datos"]
@@ -57,9 +57,10 @@ class BaseDatos():
     def actulizarDatos(self,color,ubicacion):
         conexion = self.baseDatos.connect("hestia.db")
         try:
-            conexion.execute("UPDATE SET configuraciones VALUES (color = ?, ubicacion = ?)",(color,ubicacion))
+            codigoActulizar = "UPDATE  configuraciones SET color = ?, ubicacion = ?"
+            conexion.execute(codigoActulizar,(color,ubicacion))
 
-
+            conexion.commit()
             return[0,"Los datos se hay actulizado"]
 
         except self.baseDatos.OperationalError as e:
