@@ -13,7 +13,7 @@ class controladorYoutube():
     def Descargar(self,link,boton,ubicacion):
         try:
 
-            chdir(ubicacion + "/Imagenes y Videos/Videos")
+
             respuesta = self.__modeloYoutube.validarUrl(link)
             if respuesta:
 
@@ -21,17 +21,23 @@ class controladorYoutube():
 
                 if(boton == "Alta"):
 
+                    chdir(ubicacion + "/Imagenes y Videos/Videos")
+
                     self.__youtube.streams.get_highest_resolution().download()
 
                     self.__alertas.informacion("Descarga completa")
 
                 elif( boton == "Baja"):
 
+                    chdir(ubicacion + "/Imagenes y Videos/Videos")
+
                     self.__youtube.streams.get_lowest_resolution().download()
 
                     self.__alertas.informacion("Descarga completa")
 
                 else:
+
+                    chdir(ubicacion + "/Audios")
 
                     titulo = self.__youtube.title
 
