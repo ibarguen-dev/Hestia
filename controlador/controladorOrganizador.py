@@ -39,6 +39,7 @@ class controladorOrganizador():
             #
             Path("Otros").mkdir(exist_ok=True)
 
+            Path("Audios").mkdir(exist_ok=True)
             #
             chdir("Imagenes y Videos/")
             #
@@ -144,7 +145,15 @@ class controladorOrganizador():
                         print(f"El archivo {files} ya se encuentra en la carpeta de Videos")
 
                         sleep(5)
+            #Audios
+                elif files.endswith(".mp3"):
 
+                    chdir(self.__direccion)
+
+                    if not path.exists(ruta + "/Audios/"+files):
+                        move(files, ruta + "/Audios")
+                    else:
+                        print(f"El archivo {files} ya se encuente en la carpeat de Audios")
             # Archivos PDF
 
                 elif files.endswith(".pdf"):
