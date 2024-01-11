@@ -45,7 +45,7 @@ class Vista:
 
         self.__ventana.geometry("700x550")
 
-        self.__ventana.iconbitmap("F:\\Descargas\\OIG.ico")
+        #self.__ventana.iconbitmap(".\\imagen\\logo.ico")
 
         self.__ventana.grid_rowconfigure(0, weight=1)
 
