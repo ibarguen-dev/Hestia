@@ -14,7 +14,9 @@ class controladorOrganizador():
 
         self.__alertas = vistaAlerta.vistaAlerta()
 
+    # Metodo para la creación de carpetas
     def __carpetas(self):
+
 
 
         try:
@@ -39,12 +41,22 @@ class controladorOrganizador():
             #
             Path("Otros").mkdir(exist_ok=True)
 
+            #
             Path("Audios").mkdir(exist_ok=True)
+
+            #
+            Path("Texto").mkdir(exist_ok=True)
+
+            #
+            Path("Ejecutables").mkdir(exist_ok=True)
+
             #
             chdir("Imagenes y Videos/")
+
             #
             Path("Imagenes").mkdir(exist_ok=True)
 
+            #
             Path("Videos").mkdir(exist_ok=True)
 
 
@@ -53,7 +65,7 @@ class controladorOrganizador():
 
             self.__alertas.error(e)
 
-
+    # metodo para organizar los archivos
     def archivos(self):
         try:
             chdir(self.__direccion)
@@ -153,7 +165,31 @@ class controladorOrganizador():
                     if not path.exists(ruta + "/Audios/"+files):
                         move(files, ruta + "/Audios")
                     else:
-                        print(f"El archivo {files} ya se encuente en la carpeat de Audios")
+                        print(f"El archivo {files} ya se encuente en la carpeta de Audios")
+
+                elif files.endswith(".txt"):
+
+                    chdir(self.__direccion)
+
+                    if not path.exists(ruta + "/Texto/"+files):
+
+                        move(files, ruta + "/Texto/")
+
+                    else:
+
+                        print(f"El archivo {files} ya se encuente en la carpeta de Texto")
+
+                elif files.endswith(".exe") or files.endswith(".msi"):
+
+                    chdir(self.__direccion)
+
+                    if not path.exists(ruta + "/Ejecutables/" + files):
+
+                        move(files, ruta + "/Ejecutables/")
+
+                    else:
+                        print(f"El archivo {files} ya se encuente en la carpeta de Texto")
+
             # Archivos PDF
 
                 elif files.endswith(".pdf"):
