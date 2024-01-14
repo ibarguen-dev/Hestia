@@ -11,10 +11,12 @@ class controladorPdfWord():
 
         self.__vistaAlerta = vistaAlerta()
 
+    # metodo para convertir los pdf a word convertidor
     def pdf(self,archivos):
+
         validador = 0
+
         try:
-            nombre = None
 
             for archivo in archivos:
 
@@ -24,23 +26,24 @@ class controladorPdfWord():
 
                 convert(archivo, nombre, start=0, end=0)
 
+                del nombre
+
         except Exception as e:
 
             print(f"Hubo un error al convertir el pdf: {str(e)}")
 
         finally:
 
-            del nombre
-
             if validador == 0:
                 self.__vistaAlerta.informacion("pdf convertido a word")
             else:
                 self.__vistaAlerta.error("hubo un error al momento de convertir el pdf a word")
 
+
+    # metodo para convertir los word a pdf
     def word(self,archivos):
         validador = 0
         try:
-            nombre = None
 
             for archivo in archivos:
 
@@ -50,8 +53,7 @@ class controladorPdfWord():
 
                 parse(archivo,nombre, start=0, end=0)
 
-
-
+                del nombre
 
         except Exception as e:
 
@@ -60,8 +62,6 @@ class controladorPdfWord():
 
 
         finally:
-
-            del nombre
 
             if validador == 0:
                 self.__vistaAlerta.informacion("pdf convertido a word")

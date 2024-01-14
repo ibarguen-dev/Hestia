@@ -2,10 +2,28 @@
 
 class modeloImagen():
 
+
+    """
+    Clase que realiza operaciones relacionadas con la verificación de nombres de archivos de imagen.
+    """
+
     def __init__(self):
+        """
+        Constructor de la clase.
+        """
         pass
 
     def verificar(self,ruta):
+        """
+        Verifica y extrae el nombre base de un archivo de imagen a partir de la ruta.
+
+        Args:
+            ruta (str): La ruta del archivo de imagen.
+
+        Returns:
+            str: El nombre base del archivo de imagen.
+        """
+
         nombre = None
 
         try:

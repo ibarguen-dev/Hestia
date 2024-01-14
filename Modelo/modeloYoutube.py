@@ -1,13 +1,30 @@
 from pytube import  YouTube
 from view.vistaAlerta import vistaAlerta
 class modeloYoutube():
+    """
+    Clase que realiza validaciones relacionadas con enlaces de YouTube.
+    """
 
     def __init__(self):
+        """
+        Constructor de la clase.
+        """
 
         self.__alertas = vistaAlerta
 
 
     def validarUrl(self,url):
+
+        """
+        Valida si un enlace de YouTube es válido y corresponde a un video existente.
+
+        Args:
+            url (str): El enlace de YouTube a validar.
+
+        Returns:
+            bool: True si el enlace es válido y corresponde a un video existente, False en caso contrario.
+        """
+
         try:
             if (url != "" and url.startswith("https://www.youtube.com/watch?v=")):
                 video = YouTube(url)
