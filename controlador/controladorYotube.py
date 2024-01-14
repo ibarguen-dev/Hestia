@@ -10,6 +10,7 @@ class controladorYoutube():
         self.__modeloYoutube = modeloYoutube()
         self.__alertas = vistaAlerta()
 
+    #metodo para la desdcar de videos y audios de youtube
     def Descargar(self,link,boton,ubicacion):
         try:
 
