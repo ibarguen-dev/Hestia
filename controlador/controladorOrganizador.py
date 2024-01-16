@@ -92,7 +92,8 @@ class controladorOrganizador():
                 elif files.endswith(".pdf"):
                     self.__mover_archivo(files, ruta, "PDF")
 
-                elif files not in ["Word", "PDF", "Imagenes y Videos", "Excel", "PowerPoint", "Otros"]:
+                elif files not in ["Word", "PDF", "Imagenes y Videos", "Excel", "PowerPoint", "Otros", "Ejecutables",
+                                   "Audios", "Texto"]:
                     self.__mover_archivo(files, ruta, "Otros")
 
             self.__alertas.informacion("Los archivos fueron organizados")

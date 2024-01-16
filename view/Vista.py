@@ -172,19 +172,19 @@ class Vista:
 
             self.__titulo.grid(row=0, column=0, padx=100, pady=20, )
 
-            self.__informacionWord = CTkLabel(self.__frameWord, text="Convertir Documentos a PDF", font=("Arial", 15))
+            self.__informacionWord = CTkLabel(self.__frameWord, text="Convertir Docuementos PDFS a WORD", font=("Arial", 15))
 
             self.__informacionWord.grid(row=1, column=0, pady=5)
 
             self.__botonWord = CTkButton(self.__frameWord, fg_color="#607D8B",
                                          text="Subir archivos",
-                                         command=lambda: self.__subirDocumentosWord(), font=("Arial", 12))
+                                         command=lambda: self.__subirDocumentosPdf(), font=("Arial", 12))
 
             self.__botonWord.grid(row=2, column=0, pady=10)
 
             self.__botonWordConvertidor = CTkButton(self.__frameWord,
                                                     text="Convertir PDF",
-                                                    command=lambda: self.__controladorPdfWord.pdf(self.__archivosWord))
+                                                    command=lambda: self.__controladorPdfWord.word(self.__archivosPdf))
 
         elif nombre == "Pdf":
             # Configuración y visualización para la sección de PDF
@@ -194,19 +194,19 @@ class Vista:
 
             self.__titulo.grid(row=0, column=0, padx=100, pady=20, )
 
-            self.__informacionPdf = CTkLabel(self.__framePdf, text="Convertir Documentos a WORD", font=("Arial", 15))
+            self.__informacionPdf = CTkLabel(self.__framePdf, text="Convertir Documentos WORDS a PDFS", font=("Arial", 15))
 
             self.__informacionPdf.grid(row=1, column=0, pady=5)
 
             self.__botonPdf = CTkButton(self.__framePdf,
                                         text="Subir archivos", fg_color="#607D8B",
-                                        command=lambda: self.__subirDocumentosPdf())
+                                        command=lambda: self.__subirDocumentosWord())
 
             self.__botonPdf.grid(row=2, column=0, pady=5)
 
             self.__botonPdfConvertidor = CTkButton(self.__framePdf, fg_color="#607D8B",
                                                    text="Convertir a WORD",
-                                                   command=lambda: self.__controladorPdfWord.word(self.__archivosPdf))
+                                                   command=lambda: self.__controladorPdfWord.pdf(self.__archivosWord))
 
         elif nombre == "Png":
             # Configuración y visualización para la sección de PNG
@@ -314,7 +314,7 @@ class Vista:
 
         # Verifica si se seleccionaron archivos
         if self.__subirDocumento:
-            self.__botonPdfConvertidor.grid(row=3, column=0, pady=10)
+            self.__botonWordConvertidor.grid(row=3, column=0, pady=10)
             self.__archivosPdf = self.__subirDocumento
 
     def __subirImagenesPng(self):

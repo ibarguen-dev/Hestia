@@ -20,17 +20,19 @@ class controladorPdfWord():
 
             for archivo in archivos:
 
-                nombre = self.__modeloPdfWord.pdf(archivo)
+                nombre = self.__modeloPdfWord.word(archivo)
 
-                nombre = nombre + ".docx"
+                nombre = nombre + ".pdf"
 
-                convert(archivo, nombre, start=0, end=0)
+                convert(archivo, nombre)
 
                 del nombre
 
         except Exception as e:
 
             print(f"Hubo un error al convertir el pdf: {str(e)}")
+
+            validador = 1
 
         finally:
 
