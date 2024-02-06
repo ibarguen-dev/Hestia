@@ -44,7 +44,7 @@ class Vista:
         self.__ventana.title("Hestia")
         self.__ventana.geometry("700x550")
         self.__ventana.grid_rowconfigure(0, weight=1)
-
+        self.__ventana.resizable(0,0)
         # Configuración del menú lateral
         self.__menu = CTkFrame(self.__ventana)
         self.__menu.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="nsew")

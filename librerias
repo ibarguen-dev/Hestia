@@ -4,3 +4,4 @@ pip install pdf2docx
 pip install docx2pdf
 pip install customtkinter
 pip install packaging
+pip install python-ffmpeg
