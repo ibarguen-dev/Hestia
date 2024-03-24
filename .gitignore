@@ -6,3 +6,6 @@ hestia.db
 view.py
 viewConvertidores.py
 dist
+.idea
+.vscode
+__pycache__
