@@ -1,5 +1,5 @@
 from os import chdir
-from pytube import YouTube
+from pytubefix import YouTube
 from Modelo.modeloYoutube import modeloYoutube
 from view.vistaAlerta import vistaAlerta
 class controladorYoutube():
@@ -35,6 +35,7 @@ class controladorYoutube():
         try:
             respuesta = self.__modeloYoutube.validarUrl(link)
             if respuesta:
+                print(ubicacion)
                 self.__youtube = YouTube(link)
 
                 if boton == "Alta":
@@ -56,6 +57,7 @@ class controladorYoutube():
                     self.__alertas.informacion("Descarga completa")
 
         except Exception as e:
+            print(e)
             self.__alertas.error("Hubo un error al mento de hacer las descarga" + e)
 
         finally:

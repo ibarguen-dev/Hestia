@@ -1,4 +1,4 @@
-from pytube import  YouTube
+from pytubefix import YouTube
 from view.vistaAlerta import vistaAlerta
 class modeloYoutube():
     """
@@ -29,7 +29,7 @@ class modeloYoutube():
             if (url != "" and url.startswith("https://www.youtube.com/watch?v=")):
                 video = YouTube(url)
                 if video.title:
-
+                    
                     return True
 
                 else:
@@ -44,7 +44,7 @@ class modeloYoutube():
                 return False
 
         except Exception as e:
-
+            print(e)
             self.__alertas.error(e)
 
             return  False
