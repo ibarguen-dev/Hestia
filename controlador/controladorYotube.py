@@ -51,9 +51,8 @@ class controladorYoutube():
 
                 elif boton == "Audio":
                     chdir(ubicacion + "/Audios")
-                    titulo = self.__youtube.title
-                    audio_stream = self.__youtube.streams.filter(only_audio=True).first()
-                    audio_stream.download(filename=titulo + ".mp3")
+                    audio_stream = self.__youtube.streams.get_audio_only()
+                    audio_stream.download(mp3=True)
                     self.__alertas.informacion("Descarga completa")
 
         except Exception as e:
