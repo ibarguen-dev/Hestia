@@ -1,7 +1,12 @@
 from os import chdir
-from pytubefix import YouTube
-from Model.ModelYoutube import ModelYoutube
+from pathlib import Path
+import subprocess
 import threading # Necesario para ejecutar operaciones en segundo plano
+import imageio_ffmpeg
+
+from pytubefix import YouTube
+
+from Model.ModelYoutube import ModelYoutube
 class ControllerYotube():
 
     """
@@ -55,12 +60,12 @@ class ControllerYotube():
         try:
             print("Iniciando descarga en segundo plano...")
             self.__youtube = YouTube(link)
+
             if button == "High":
                 chdir(address + "/Videos")
                 print("Descargando video en alta calidad...")
                 self.__youtube.streams.get_highest_resolution().download()
                 print("Descarga completada - notificando...")
-                # Usar page.run_task directamente con función async
                 self.page.run_task(self._notify_success)
 
             elif button == "Low":
@@ -68,17 +73,88 @@ class ControllerYotube():
                 print("Descargando video en baja calidad...")
                 self.__youtube.streams.get_lowest_resolution().download()
                 print("Descarga completada - notificando...")
-                # Usar page.run_task directamente con función async
                 self.page.run_task(self._notify_success)
+
+            elif button == "Audio":
+                self._download_audio_as_mp3(address)
+                print("Descarga y conversión a MP3 completadas - notificando...")
+                self.page.run_task(self._notify_success)
+
         except Exception as e:
             print(f"Error en descarga: {e}")
-            # Usar page.run_task directamente con función async
-            self.page.run_task(self._notify_error)
+            self.page.run_task(
+                self._notify_error,
+                f"Hubo un error al descargar el archivo: {e}"
+            )
+
+    def _download_audio_as_mp3(self, address):
+        """Descarga el audio de YouTube y lo convierte de M4A a MP3."""
+        audio_folder = Path(address) / "Audios"
+        audio_folder.mkdir(parents=True, exist_ok=True)
+
+        stream = (
+            self.__youtube.streams
+            .filter(only_audio=True)
+            .order_by("abr")
+            .desc()
+            .first()
+        )
+
+        if stream is None:
+            raise RuntimeError("No se encontró un stream de audio disponible.")
+
+        source_path = None
+        mp3_path = None
+        try:
+            
+
+            print("Descargando audio temporal...")
+            source_path = Path(stream.download(output_path=str(audio_folder)))
+            mp3_path = source_path.with_suffix(".mp3")
+            ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
+
+            print("Convirtiendo audio a MP3...")
+            result = subprocess.run(
+                [
+                    ffmpeg_path,
+                    "-y",
+                    "-loglevel",
+                    "error",
+                    "-i",
+                    str(source_path),
+                    "-vn",
+                    "-codec:a",
+                    "libmp3lame",
+                    "-b:a",
+                    "192k",
+                    str(mp3_path),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            if result.returncode != 0:
+                error = result.stderr.strip() or "FFmpeg no pudo convertir el audio."
+                raise RuntimeError(error)
+
+            source_path.unlink(missing_ok=True)
+            print(f"MP3 guardado en: {mp3_path}")
+
+        except ImportError as e:
+            raise RuntimeError(
+                "Falta imageio-ffmpeg. Ejecuta 'pip install -r requirements.txt'."
+            ) from e
+        except Exception:
+            for temporary_path in (source_path, mp3_path):
+                if temporary_path is not None:
+                    temporary_path.unlink(missing_ok=True)
+            raise
 
     async def _notify_success(self):
         """Función async para notificar éxito en el hilo principal"""
         self.show_info("¡Descarga completada exitosamente!")
 
-    async def _notify_error(self):
-        """Función async para notificar error en el hilo principal"""
-        self.show_error("Hubo un error al momento de hacer la descarga")
+    async def _notify_error(self, message="Hubo un error al momento de hacer la descarga"):
+        """Función async para notificar errores en el hilo principal"""
+        self.show_error(message)

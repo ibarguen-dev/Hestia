@@ -1,7 +1,8 @@
 import flet as ft
+import inspect
 from controls.ControllerYotube import ControllerYotube
 from controls.ControllerOrganizer import ControllerOrganizer
-from controls.Controllerdecompress import Controllerdecompress
+
 class HestiaApp:
     def __init__(self, page: ft.Page,adress: str):
         self.page = page
@@ -29,15 +30,6 @@ class HestiaApp:
             duration=3000,
             action="OK"
         )
-        
-        self.file_picker = ft.FilePicker(on_result=self._on_decompress_file_selected)
-        self.page.overlay.append(self.file_picker)
-        
-        self.file_picker_image = ft.FilePicker(on_result=self._on_image_file_selected)
-        self.page.overlay.append(self.file_picker_image)
-        
-        self.file_picker_file = ft.FilePicker(on_result=self._on_file_file_selected)
-        self.page.overlay.append(self.file_picker_file)
         
         # Agregar el snackbar al overlay de la página
         self.page.overlay.append(self.info_snackbar)
@@ -79,21 +71,17 @@ class HestiaApp:
         
         
         
-        self.__controllerDecompress = Controllerdecompress()
-        
         # --- Definición de Vistas ---
         self.welcome_view = self._create_welcome_view()
         self.youtube_view = self._create_youtube_view()
         self.organizer_view = self._create_organizer_view()
-        # self.images_view = self._create_images_view()
-        # self.decompress_view = self._create_decompress_view()
-        # self.convert_file_view = self._create_convert_file_view()
+        
 
         # --- Contenedor principal que mostrará las diferentes vistas ---
         self.main_content_area = ft.Container(
             content=self.welcome_view, # Inicia con la vista de bienvenida
             expand=True,
-            alignment=ft.alignment.center,
+            alignment=ft.Alignment.CENTER,
         )
         
         # --- Componentes principales de la UI (Botón de Ajustes y Menú) ---
@@ -166,6 +154,7 @@ class HestiaApp:
                     [
                         ft.ElevatedButton("Descargar Alta Calidad", on_click=lambda e: self.__controllerYotube.Download(self.youtube_link_input.value,"High",self.adress)),
                         ft.ElevatedButton("Descargar Baja Calidad", on_click=lambda e: self.__controllerYotube.Download(self.youtube_link_input.value,"Low",self.adress)),
+                        ft.ElevatedButton("Descargar MP3", on_click=lambda e: self.__controllerYotube.Download(self.youtube_link_input.value,"Audio",self.adress)),
                     ],
                     alignment=ft.MainAxisAlignment.CENTER
                 )
@@ -174,7 +163,9 @@ class HestiaApp:
             alignment=ft.MainAxisAlignment.CENTER,
             expand=True
         )
-        
+
+
+
 
 
     def _create_organizer_view(self):
@@ -189,53 +180,6 @@ class HestiaApp:
             expand=True
         )
 
-    def _create_decompress_view(self):
-        return ft.Column(
-            [
-                ft.Text("Descomprimir Archivos", size=24, weight=ft.FontWeight.BOLD),
-                ft.Row(
-                    [
-                        
-                        ft.IconButton(
-                            icon=ft.Icons.FOLDER_OPEN,
-                            tooltip="Seleccionar archivo comprimido",
-                            on_click=lambda _: self.file_picker.pick_files(
-                                dialog_title="Seleccionar archivo para descomprimir",
-                                allow_multiple=False,
-                                allowed_extensions=["zip", "rar", "7z", "tar", "gz"]
-                            )
-                        ),
-                    self.compressed_file_path_input,
-                ],
-                alignment=ft.MainAxisAlignment.CENTER
-                ),
-                ft.ElevatedButton("Descomprimir", on_click=lambda e: self.__controllerDecompress.decompress(self.compressed_file_path_input.value,self.adress+"/Descomprimidos")),
-            ],
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-            alignment=ft.MainAxisAlignment.CENTER,
-            expand=True
-        )
-        
-    def _on_decompress_file_selected(self, e: ft.FilePickerResultEvent):
-        if e.files:
-            selected_path = e.files[0].path
-            self.compressed_file_path_input.value = selected_path
-            print(f"Archivo seleccionado para descomprimir: {selected_path}")
-            self.page.update()
-            
-    def _on_image_file_selected(self, e: ft.FilePickerResultEvent):
-        if e.files:
-            selected_path = e.files[0].path
-            self.imagen_link_input.value = selected_path
-            print(f"Archivo seleccionado para descomprimir: {selected_path}")
-            self.page.update()
-
-    def _on_file_file_selected(self, e: ft.FilePickerResultEvent):
-        if e.files:
-            selected_path = e.files[0].path
-            self.imagen_link_input.value = selected_path
-            print(f"Archivo seleccionado para descomprimir: {selected_path}")
-            self.page.update()
 
     # --- Métodos para crear los componentes principales de la UI ---
     # def _create_settings_button(self):
@@ -254,7 +198,6 @@ class HestiaApp:
         - Inicio
         - Organizador de archivos
         - YouTube
-        - Descomprimir
         Returns:
             ft.NavigationRail: Componente de menú lateral de Flet.
         """
@@ -270,7 +213,7 @@ class HestiaApp:
                         src="https://flet.dev/img/flet-logo.svg",
                         width=60,
                         height=60,
-                        fit=ft.ImageFit.CONTAIN,
+                        fit=ft.BoxFit.CONTAIN,
                     ),
                     ft.Text("Menú", size=20, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER)
                 ],
@@ -292,10 +235,6 @@ class HestiaApp:
                     icon=ft.Icon(ft.Icons.DOWNLOAD),
                     label="YouTube",
                 ),
-                # ft.NavigationRailDestination(
-                #     icon=ft.Icon(ft.Icons.DATA_USAGE), # Cambié a un icono más genérico para "Descomprimido"
-                #     label="Descomprimir",
-                # ),
             ],
             on_change=self._change_main_content, # Referencia al método de la instancia
         )

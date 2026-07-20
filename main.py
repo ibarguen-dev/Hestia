@@ -30,7 +30,7 @@ try:
             app = HestiaApp(page,dictionaryData["ubicacion"])
             
         # Iniciar la aplicación utilizando la vista creada
-        ft.app(target=main)
+        ft.run(main)
         
     else:
 

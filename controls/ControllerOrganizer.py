@@ -59,7 +59,7 @@ class ControllerOrganizer():
                 elif files.endswith((".mp4", ".avi", ".mov", ".flv", ".mkv", ".wmv")):
                     self.__move_file(files, ruta, "Videos")
 
-                elif files.endswith(".mp3"):
+                elif files.endswith((".mp3", ".m4a", ".aac")):
                     self.__move_file(files, ruta, "Audios")
 
                 elif files.endswith(".txt"):
